@@ -32,7 +32,7 @@ export default function Home() {
       <section className="relative w-full h-screen min-h-[800px] flex items-center justify-center pt-20 z-10">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/hero-bendicion.jpg"
+            src="/hero-index.jpg"
             alt="La Bendición Hero"
             fill
             className="object-cover opacity-50 contrast-125"
