@@ -3,8 +3,19 @@ services:
     build: .
     container_name: labendicion
     restart: unless-stopped
-    ports:
-      - "3100:3000"
     environment:
       - NODE_ENV=production
       - NEXT_TELEMETRY_DISABLED=1
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.labendicion.rule=Host(`labendicion.mhuri.tech`)
+      - traefik.http.routers.labendicion.tls=true
+      - traefik.http.routers.labendicion.entrypoints=web,websecure
+      - traefik.http.routers.labendicion.tls.certresolver=mytlschallenge
+      - traefik.http.services.labendicion.loadbalancer.server.port=3000
+    networks:
+      - root_default
+
+networks:
+  root_default:
+    external: true
