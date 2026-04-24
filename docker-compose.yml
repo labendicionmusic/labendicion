@@ -1,0 +1,16 @@
+services:
+  labendicion:
+    build: .
+    container_name: labendicion
+    restart: unless-stopped
+    ports:
+      - "3100:3000"
+    environment:
+      - NODE_ENV=production
+      - NEXT_TELEMETRY_DISABLED=1
+    networks:
+      - web
+
+networks:
+  web:
+    external: true
