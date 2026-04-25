@@ -5,6 +5,12 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
+// --- CONFIGURACIÓN DEL HERO ---
+// Cambia a 'video' para activar el fondo de YouTube, o 'image' para la foto estática.
+const HERO_TYPE: 'image' | 'video' = 'video'; 
+const YOUTUBE_ID = 'nuClYq_09vE'; 
+// ------------------------------
+
 export default function Home() {
   // Animation variants
   const fadeInUp = {
