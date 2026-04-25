@@ -328,7 +328,7 @@ export default function DiscografiaPage() {
               Spotify
             </a>
             <a 
-              href="https://music.apple.com" 
+              href="https://music.apple.com/us/artist/la-bendici%C3%B3n/1705054677" 
               target="_blank" 
               rel="noopener noreferrer"
               className="bg-transparent border border-outline-variant text-white px-10 py-5 font-mono text-xs uppercase tracking-[0.2em] font-bold flex items-center gap-3 hover:border-white hover:bg-white hover:text-black transition-all duration-300"

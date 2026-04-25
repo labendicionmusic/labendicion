@@ -4,49 +4,57 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 
-export default function TiendaPage() {
-  const categories = ['Todo', 'Vinilos', 'Ropa', 'Accesorios'];
+export default function MerchPage() {
+  const categories = ['Todo', 'Música', 'Ropa', 'Accesorios'];
   
   const products = [
     {
       id: 1,
-      name: 'LP.01 // BENDICIÓN',
-      price: '$45',
-      description: 'Doble vinilo verde esmeralda translúcido con arte brutalista exclusivo del álbum debut.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA_VvjibICOjSpgW3AXnDtrGKxpXjfN90gIKRP1ARqc3qVfbZp6gxdRmNh_ETE50JYAdERhGG9hxm1Y-8-bAzbuuD6vgtHGHEqAIP8oaMrRuMxxvgO9JDdJUjG07AAuaAGXsB73-LBHnxkDdfHeboGBJU3K-O5uNzwK4oEl14yCG6JvSzFcb7WH1CwmiyO4sr0muuguHdCli4Sy6kOI1BoElx9EXeSLdNPrre6BBr1cBVJgSAPEAekKI7SZeO9o1IplOlWpNQTfJLY',
+      name: 'La Bendición - Vol. 1 LP',
+      price: '$500 MXN',
+      description: 'El primer LP de La Bendición, disponible en formato vinilo. Vol. 1 presenta una colección de temas originales que combinan la tradición de la salsa con una producción contemporánea, desarrollada entre Ciudad de México y La Habana. Este formato en vinilo está pensado para ofrecer una experiencia de escucha completa, respetando el orden y la narrativa del disco tal como fue concebido.',
+      image: '/merch-lp.jpg',
       isFeatured: true,
-      badge: 'EDICIÓN LIMITADA'
+      badge: 'PIEZA MAESTRA'
     },
     {
       id: 2,
-      name: 'PLAYERA // AMANECER',
-      price: '$30',
-      description: 'Heavyweight cotton orgánico. Fit boxy.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuC-OOOq9YeZafieVSjpFv28X4sGDvGOh5BjiSGNOGBs2BP8lcjsYvubQU4MmFov-ZBeY7SUH5HfZLGigrkQ7SWx9xg8HlzQgDnkAgOrFgm-6dTGOiTuDr5JdyprgK7QHULBM6VcnQZeBlMIZMUB1HeohEK3KUDQPADGgj5QJeN9yqxqQbwAxweRVjQc2BFHwwAWAcgmVO_e2wC23EB-A3vi3P6kxBNsNkF9bxeI5W3QMOJSAQ3dtbZ4kOS_8JQCaf-RIsgYk4Ldn48',
+      name: 'Playera "Agua bendita pa to el mundo"',
+      price: '$450 MXN',
+      description: '',
+      image: '/merch-shirt.jpg',
       isFeatured: false
     },
     {
       id: 3,
-      name: 'PLAYERA // CORE',
-      price: '$25',
-      description: 'La básica. Blanca con logo bordado alta definición.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAQ3kd_391jk4u9w-dPMMbLWy6l1h5NLL3CDVDac6OWrRAUwDmD1Ox2j1ppvrWoQaUA_MG-8IpCcx1MxN20RZYSnc-l8awNwmOvB0TuDHIGkmOmQiaXKsG3Cow8Es1nrOOHurut_XquHEaas55KoOoD2m4GEHpMXdWmaFZzyCM1EKDSZIsRwWdexaz3y7e2i_TaXb2G443-Bik0RRkvs1ecRO1V0Mm03SPcqLgWOE2R8L73Ygf6tW0qQh3FfG2f8Ook-FhUj8AstpU',
+      name: 'Gorra "LB" (Negra)',
+      price: '$350 MXN',
+      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
+      image: '/merch-cap-black.jpg',
       isFeatured: false
     },
     {
       id: 4,
-      name: 'GORRA // TROPICAL',
-      price: '$22',
-      description: '100% algodón premium.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCdX3NXVUvc99OfP0OBGIe9R_RIJk7SbR_tESD2nl4jJB8o9mX6SrfGLWNeBxBLgRsOelz0h0-mn9BxscAdtAMBLN-xDd019IaZ_F3lVJopSY55rbalCyKAf74ayy_UyL_y21UYTuUrgxvb__d9benmC6HfjP42jz6DLR9SUyRi8s-4i6HBTYQCRAwRwDCMcZrRazIVo4F0mc2EiNM-o5gkAsxWihGlmyuYeshtW6G9NMvRfQ11BzjMuTLa44DyuTz_Jo2ubZWx9w4',
+      name: 'Gorra "LB" (Gris)',
+      price: '$350 MXN',
+      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
+      image: '/merch-cap-grey.jpg',
       isFeatured: false
     },
     {
       id: 5,
-      name: 'BOLSA // RITMO',
-      price: '$18',
-      description: 'Heavy duty tote bag.',
-      image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDguw7GpenpqLAlOP5ztM-0YZ_7g_jmyDyNhaddrfvZQ4r7HeknITMxE655zabIDYfd4d6eqjUawq2z06tbYTTbcaInddG8dliKBCdsxeZYWrU7Jsl3xvjxHZL9thA5J3QvKL18nQ7qc3x-7isZmuylrsrapveLu1mEzZFHeUXyKj1B69RqQOxLjLZqUNajrxHBRjwFYcbodmbSQd7NboSe3OUEe99LCh6Q78GY19yBiPaiGJxBziylwa4zcnzzyHv2DsZ1XBMkx7A',
+      name: 'Gorra Naranja "Rumba"',
+      price: '$350 MXN',
+      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
+      image: '/merch-cap-orange.jpg',
+      isFeatured: false
+    },
+    {
+      id: 6,
+      name: 'Set 4 porta vasos "Vol. 1"',
+      price: '$400 MXN',
+      description: 'Colección de 4 porta vasos "Vol. 1". El complemento ideal para tu zona de escucha.',
+      image: '/merch-coasters.jpg',
       isFeatured: false
     }
   ];
@@ -83,10 +91,10 @@ export default function TiendaPage() {
         >
           <div>
             <h1 className="font-display text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-              Temporada <span className="text-primary">1</span>
+              TEMPORADA <span className="text-primary">2026</span>
             </h1>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-on-surface-variant mt-4 font-bold">
-              Drop Oficial
+              Drop Oficial // Stock Limitado
             </p>
           </div>
           
@@ -107,7 +115,7 @@ export default function TiendaPage() {
           </div>
         </motion.header>
 
-        {/* Streetwear Bento Grid */}
+        {/* Merch Grid */}
         <motion.div 
           className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(400px,auto)]"
           variants={staggerContainer}
@@ -151,7 +159,7 @@ export default function TiendaPage() {
                   }`}>
                     {product.name}
                   </h2>
-                  <p className="font-mono text-xs text-on-surface-variant uppercase tracking-widest mb-8">
+                  <p className="font-sans text-sm text-on-surface-variant leading-relaxed mb-8 font-light">
                     {product.description}
                   </p>
                 </div>
@@ -159,7 +167,7 @@ export default function TiendaPage() {
                 {/* Price & Action */}
                 <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 w-full border-t border-outline-variant/30 pt-6">
                   <span className={`font-mono font-black text-white ${
-                    product.isFeatured ? 'text-4xl' : 'text-3xl'
+                    product.isFeatured ? 'text-4xl' : 'text-2xl'
                   }`}>
                     {product.price}
                   </span>

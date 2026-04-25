@@ -11,7 +11,7 @@ const navLinks = [
   { name: 'Bio', href: '/bio' },
   { name: 'Discografía', href: '/discografia' },
   { name: 'Tour', href: '/tour' },
-  { name: 'Tienda', href: '/tienda' },
+  { name: 'Merch', href: '/merch' },
 ];
 
 export default function Navbar() {

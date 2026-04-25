@@ -36,8 +36,36 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "La Bendición | El Ritmo del Alma",
-  description: "Sitio oficial de La Bendición. Una fusión vibrante de raíces latinas, energía tropical y sonidos modernos.",
+  title: "La Bendición | La Nueva Ola de la Salsa",
+  description: "Agrupación de salsa contemporánea que fusiona la tradición afrocaribeña con el sonido urbano. Ciudad de México - La Habana.",
+  metadataBase: new URL('https://labendicion.mhuri.tech'),
+  openGraph: {
+    title: "La Bendición",
+    description: "La nueva ola de la salsa. Fusión contemporánea de raíces latinas y sonido urbano.",
+    url: '/',
+    siteName: 'La Bendición',
+    images: [
+      {
+        url: '/hero-index-bw.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'La Bendición',
+      },
+    ],
+    locale: 'es_MX',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'La Bendición',
+    description: 'La nueva ola de la salsa.',
+    images: ['/hero-index-bw.jpg'],
+  },
+  icons: {
+    icon: '/favicon-black.svg',
+    shortcut: '/favicon-black.svg',
+    apple: '/favicon-black.svg',
+  },
 };
 
 export default function RootLayout({

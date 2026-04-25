@@ -34,7 +34,7 @@ export default function BioPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[600px] md:h-[850px] overflow-hidden mb-24"
+          className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[400px] md:h-[850px] overflow-hidden mb-24"
         >
           <Image
             src="/bio-hero.jpg"
