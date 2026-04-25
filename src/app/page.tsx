@@ -29,7 +29,7 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[420px] md:h-screen flex items-end justify-center z-10 pb-4">
+      <section className="relative w-full h-[420px] md:h-screen flex items-end justify-center z-10 pb-6 md:pb-12">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero-index.jpg"
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:h-full md:pb-32"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:h-full"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -58,11 +58,12 @@ export default function Home() {
             <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-2 md:mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
             </p>
-            <div className="flex flex-col gap-4 w-full sm:w-auto">
-              <Link href="/discografia" className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
-                Escuchar Ahora
+            <div className="flex flex-row gap-2 w-full md:flex-col md:gap-4 md:w-auto mt-2">
+              <Link href="/discografia" className="flex-1 bg-primary text-black font-mono text-[10px] md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] font-black px-2 md:px-12 py-4 md:py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
+                <span className="md:hidden">Escuchar</span>
+                <span className="hidden md:inline">Escuchar Ahora</span>
               </Link>
-              <Link href="/tour" className="border border-outline-variant text-white font-mono text-sm uppercase tracking-[0.2em] font-bold px-12 py-5 hover:border-primary hover:text-primary transition-all duration-300 text-center">
+              <Link href="/tour" className="flex-1 border border-white/30 text-white font-mono text-[10px] md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] font-black px-2 md:px-12 py-4 md:py-5 hover:bg-white hover:text-black transition-all duration-300 text-center">
                 Tour '26
               </Link>
             </div>
