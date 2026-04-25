@@ -12,7 +12,7 @@ export default function MerchPage() {
       id: 1,
       name: 'La Bendición - Vol. 1 LP',
       price: '$500 MXN',
-      description: 'El primer LP de La Bendición en vinilo. Una colección de temas originales que fusionan la tradición de la salsa con producción contemporánea entre CDMX y La Habana.',
+      description: '',
       image: '/merch-lp.jpg',
       isFeatured: true,
       badge: 'PIEZA MAESTRA'

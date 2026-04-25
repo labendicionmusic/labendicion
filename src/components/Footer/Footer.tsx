@@ -54,7 +54,11 @@ export default function Footer() {
         <div className="text-on-surface-variant/50 text-center lg:text-right uppercase tracking-[0.2em]">
           &copy; {new Date().getFullYear()} La Bendición. <br className="hidden lg:block"/> El ritmo del alma.
         </div>
-        
+      </div>
+
+      {/* Powered by Mhuri */}
+      <div className="w-full border-t border-outline-variant/10 py-6 text-center text-on-surface-variant/30 text-[10px] uppercase tracking-[0.3em]">
+        Powered by <a href="https://www.mhuri.tech" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300 font-bold">Mhuri</a>
       </div>
     </footer>
   );
