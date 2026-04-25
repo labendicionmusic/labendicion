@@ -47,7 +47,7 @@ export default function Navbar() {
               src="/logo-bendicion.svg" 
               alt="La Bendición Logo" 
               fill 
-              className="object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+              className="object-contain" 
               priority
             />
           </Link>

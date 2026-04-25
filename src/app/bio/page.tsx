@@ -21,7 +21,7 @@ export default function BioPage() {
           transition={{ duration: 0.8 }}
           className="mb-24 border-l-8 border-primary pl-8"
         >
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] font-black text-white tracking-tighter uppercase leading-[0.85]">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85]">
             HISTORIA
           </h1>
           <p className="font-mono text-xs uppercase tracking-[0.4em] font-bold text-on-surface-variant mt-6">
@@ -34,7 +34,7 @@ export default function BioPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5 }}
-          className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[400px] md:h-[850px] overflow-hidden mb-24"
+          className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[300px] md:h-[850px] overflow-hidden mb-24"
         >
           <Image
             src="/bio-hero.jpg"

@@ -29,33 +29,33 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[85vh] md:h-screen min-h-[600px] md:min-h-[800px] flex items-center justify-center pt-20 z-10">
+      <section className="relative w-full h-[65vh] md:h-screen min-h-[400px] md:min-h-[800px] flex items-end justify-center z-10 pb-2 md:pb-16">
         <div className="absolute inset-0 z-0">
           <Image 
-            src="/hero-index-bw.jpg"
+            src="/hero-index.jpg"
             alt="La Bendición Hero"
             fill
-            className="object-cover opacity-50 contrast-125 object-top md:object-center"
+            className="object-cover opacity-90 contrast-110 object-top md:object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-6 md:gap-8 items-end h-full pb-12 md:pb-32"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-2 md:gap-8 items-end md:h-full"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1">
-            <h1 className="font-display text-4xl sm:text-5xl md:text-8xl lg:text-[10rem] text-white leading-[0.85] font-black tracking-tighter uppercase">
+            <h1 className="font-display text-3xl sm:text-4xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
               Ritmo <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Salvaje.</span>
             </h1>
           </motion.div>
           
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right border-l md:border-l-0 md:border-r-4 border-primary pl-6 md:pl-0 md:pr-6">
-            <p className="font-sans text-lg md:text-xl text-on-surface-variant font-light leading-relaxed mb-8 max-w-sm">
+            <p className="font-sans text-lg md:text-xl text-on-surface-variant font-light leading-relaxed mb-4 md:mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos. No escuches, <strong>siente</strong>.
             </p>
             <div className="flex flex-col gap-4 w-full sm:w-auto">

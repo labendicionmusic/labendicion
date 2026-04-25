@@ -128,7 +128,7 @@ export default function DiscografiaPage() {
           transition={{ duration: 0.8 }}
           className="mb-16 border-l-8 border-primary pl-8"
         >
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[9rem] font-black text-white tracking-tighter uppercase leading-[0.85]">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85]">
             MÚSICA
           </h1>
           <p className="font-mono text-xs uppercase tracking-[0.4em] font-bold text-on-surface-variant mt-6">

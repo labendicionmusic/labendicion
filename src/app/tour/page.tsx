@@ -42,12 +42,12 @@ export default function TourPage() {
         
         {/* Header */}
         <motion.header 
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
-          className="mb-20 text-center md:text-left"
+          className="mb-20 border-l-8 border-primary pl-8"
         >
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black text-white leading-[0.8] tracking-tighter uppercase">
+          <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-white leading-[0.8] tracking-tighter uppercase">
             Tour <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">2026</span>
           </h1>
         </motion.header>
@@ -132,7 +132,7 @@ export default function TourPage() {
               src="/tour-live.jpg" 
               alt="La Bendición Live" 
               fill 
-              className="object-cover opacity-50 grayscale hover:opacity-70 transition-opacity duration-700" 
+              className="object-cover opacity-80 hover:opacity-100 transition-opacity duration-700" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background opacity-80"></div>
             
