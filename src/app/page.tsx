@@ -29,7 +29,7 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[85vh] md:h-screen flex items-end justify-center z-10">
+      <section className="relative w-full h-[420px] md:h-screen flex items-end justify-center z-10 pb-4">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero-index.jpg"
@@ -42,21 +42,21 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end h-full md:grid md:grid-cols-12 gap-2 md:gap-8 items-end pb-12 md:pb-32"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:h-full md:pb-32"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1">
-            <h1 className="font-display text-2xl sm:text-4xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
+            <h1 className="font-display text-xl sm:text-4xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
               Ritmo <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Salvaje.</span>
             </h1>
           </motion.div>
           
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right border-l md:border-l-0 md:border-r-4 border-primary pl-6 md:pl-0 md:pr-6">
-            <p className="font-sans text-base md:text-xl text-on-surface-variant font-light leading-relaxed mb-4 md:mb-8 max-w-sm">
-              Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos. No escuches, <strong>siente</strong>.
+            <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-2 md:mb-8 max-w-sm">
+              Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
             </p>
             <div className="flex flex-col gap-4 w-full sm:w-auto">
               <Link href="/discografia" className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
