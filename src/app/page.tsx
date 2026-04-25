@@ -30,7 +30,7 @@ export default function Home() {
 
       {/* Kinetic Hero Section */}
       <section className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12">
-        <div className="absolute top-0 left-0 w-full h-[450px] md:h-full z-0">
+        <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0">
           <Image 
             src="/hero-index.jpg"
             alt="La Bendición Hero"
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:h-full"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end h-full md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:pb-32"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
@@ -55,15 +55,14 @@ export default function Home() {
           </motion.div>
           
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right border-l md:border-l-0 md:border-r-4 border-primary pl-6 md:pl-0 md:pr-6">
-            <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-2 md:mb-8 max-w-sm">
+            <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-4 md:mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
             </p>
-            <div className="flex flex-row gap-2 w-full md:flex-col md:gap-4 md:w-auto mt-2">
-              <Link href="/discografia" className="flex-1 bg-primary text-black font-mono text-[10px] md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] font-black px-2 md:px-12 py-4 md:py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
-                <span className="md:hidden">Escuchar</span>
-                <span className="hidden md:inline">Escuchar Ahora</span>
+            <div className="flex flex-col gap-4 w-full md:w-auto mt-2">
+              <Link href="/discografia" className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
+                Escuchar Ahora
               </Link>
-              <Link href="/tour" className="flex-1 border border-white/30 text-white font-mono text-[10px] md:text-sm uppercase tracking-[0.1em] md:tracking-[0.2em] font-black px-2 md:px-12 py-4 md:py-5 hover:bg-white hover:text-black transition-all duration-300 text-center">
+              <Link href="/tour" className="border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:text-black transition-all duration-300 text-center">
                 Tour '26
               </Link>
             </div>
