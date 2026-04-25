@@ -29,20 +29,20 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[70vh] md:h-screen min-h-[500px] md:min-h-[800px] flex items-center justify-center pt-20 z-10">
+      <section className="relative w-full h-[85vh] md:h-screen min-h-[600px] md:min-h-[800px] flex items-end md:items-center justify-center z-10 pb-12 md:pb-0">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero-index-bw.jpg"
             alt="La Bendición Hero"
             fill
-            className="object-cover opacity-50 contrast-125"
+            className="object-cover opacity-50 contrast-125 object-top md:object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent"></div>
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end h-full pb-12 md:pb-32"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
