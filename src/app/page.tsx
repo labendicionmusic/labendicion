@@ -96,7 +96,7 @@ export default function Home() {
               
               <h3 className="font-display text-4xl text-on-surface-variant font-bold uppercase tracking-tight mb-8">Nuestra Identidad</h3>
               
-              <div className="flex flex-col gap-0 font-display text-7xl md:text-8xl lg:text-[7rem] font-black leading-[0.8] uppercase tracking-tighter">
+              <div className="flex flex-col gap-0 font-display text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] font-black leading-[0.8] uppercase tracking-tighter">
                 <span className="text-white hover:text-primary transition-colors duration-300">TRADICIÓN</span>
                 <span className="text-outline-variant hover:text-secondary transition-colors duration-300">&amp;</span>
                 <span className="text-white hover:text-primary transition-colors duration-300">MODERNIDAD</span>
