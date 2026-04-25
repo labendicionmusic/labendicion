@@ -40,13 +40,12 @@ export default function BioPage() {
             src="/bio-hero.jpg"
             alt="La Bendición en vivo"
             fill
-            className="object-cover grayscale opacity-40 contrast-125 brightness-75"
+            className="object-cover contrast-110"
             priority
           />
           
-          {/* Blend Gradients */}
-          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background opacity-60"></div>
+          {/* Blend Gradients - Subtle only at top/bottom */}
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20"></div>
 
           {/* Minimal Archive Label */}
           <div className="absolute bottom-12 left-12 md:left-24 font-mono text-[10px] uppercase tracking-[0.5em] text-white/30">
