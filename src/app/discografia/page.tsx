@@ -15,7 +15,18 @@ export default function DiscografiaPage() {
       type: 'ÁLBUM',
       description: 'El primer álbum completo de La Bendición. La culminación de años de sencillos, presentaciones en vivo y una visión que ahora se materializa en un cuerpo de trabajo completo.',
       spotifyUrl: 'https://open.spotify.com/album/2dgIwDHlAmKP3E3jqjUS5e',
-      tracks: [],
+      tracks: [
+        'Mal De Amor', 
+        'Que Mala', 
+        "Cuidao' Por Ahí", 
+        'Tírame', 
+        'La Perla', 
+        'SongoSorongo', 
+        'Que Pasó', 
+        'La Selva', 
+        'Todo Lo Que Tengo', 
+        'Una Ilusión'
+      ],
       isUpcoming: false
     },
     {
