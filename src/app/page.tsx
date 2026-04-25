@@ -42,20 +42,20 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-end h-full pb-32"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 items-end h-full pb-12 md:pb-32"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
           <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1">
-            <h1 className="font-display text-6xl md:text-8xl lg:text-[10rem] text-white leading-[0.85] font-black tracking-tighter uppercase">
+            <h1 className="font-display text-4xl sm:text-5xl md:text-8xl lg:text-[10rem] text-white leading-[0.85] font-black tracking-tighter uppercase">
               Ritmo <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Salvaje.</span>
             </h1>
           </motion.div>
           
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right border-l md:border-l-0 md:border-r-4 border-primary pl-6 md:pl-0 md:pr-6">
-            <p className="font-sans text-xl text-on-surface-variant font-light leading-relaxed mb-8 max-w-sm">
+            <p className="font-sans text-lg md:text-xl text-on-surface-variant font-light leading-relaxed mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos. No escuches, <strong>siente</strong>.
             </p>
             <div className="flex flex-col gap-4 w-full sm:w-auto">
