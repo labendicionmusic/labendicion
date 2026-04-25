@@ -36,20 +36,20 @@ const notoSerif = Noto_Serif({
 });
 
 export const metadata: Metadata = {
-  title: "La Bendición | La Nueva Ola de la Salsa",
-  description: "Agrupación de salsa contemporánea que fusiona la tradición afrocaribeña con el sonido urbano. Ciudad de México - La Habana.",
+  title: "La Bendición | La Nueva Ola de la Salsa Afrocaribeña Contemporánea",
+  description: "Descubre a La Bendición, la agrupación que fusiona la tradición de la salsa con el sonido urbano contemporáneo. Explora nuestra música, merch oficial y tour 2026.",
   metadataBase: new URL('https://labendicion.mhuri.tech'),
   openGraph: {
-    title: "La Bendición",
-    description: "La nueva ola de la salsa. Fusión contemporánea de raíces latinas y sonido urbano.",
+    title: "La Bendición | La Nueva Ola de la Salsa Contemporánea",
+    description: "Salsa, sudor y ritmo. Conoce la propuesta musical que está revolucionando la escena afrocaribeña desde Ciudad de México y La Habana.",
     url: '/',
     siteName: 'La Bendición',
     images: [
       {
-        url: '/hero-index-bw.jpg',
+        url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'La Bendición',
+        alt: 'La Bendición - La Nueva Ola de la Salsa',
       },
     ],
     locale: 'es_MX',
@@ -57,9 +57,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'La Bendición',
-    description: 'La nueva ola de la salsa.',
-    images: ['/hero-index-bw.jpg'],
+    title: 'La Bendición | La Nueva Ola de la Salsa',
+    description: 'Salsa contemporánea fusionada con el sonido urbano. Ciudad de México - La Habana.',
+    images: ['/og-image.jpg'],
   },
   icons: {
     icon: '/favicon-black.svg',
