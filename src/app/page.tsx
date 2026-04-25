@@ -29,7 +29,7 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[65vh] md:h-screen min-h-[400px] md:min-h-[800px] flex items-end justify-center z-10 pb-2 md:pb-16">
+      <section className="relative w-full h-[400px] md:h-screen min-h-[400px] md:min-h-[800px] flex items-end justify-center z-10 pb-4 md:pb-16">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero-index.jpg"
