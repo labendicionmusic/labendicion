@@ -29,8 +29,8 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[70vh] md:h-screen flex items-end justify-center z-10 pb-6 md:pb-12">
-        <div className="absolute inset-0 z-0">
+      <section className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12">
+        <div className="absolute top-0 left-0 w-full h-[450px] md:h-full z-0">
           <Image 
             src="/hero-index.jpg"
             alt="La Bendición Hero"
@@ -38,7 +38,7 @@ export default function Home() {
             className="object-cover opacity-90 contrast-110 object-top md:object-center"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
         </div>
 
         <motion.div 
