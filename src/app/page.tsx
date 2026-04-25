@@ -29,7 +29,7 @@ export default function Home() {
       </div>
 
       {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[400px] md:h-screen min-h-[400px] md:min-h-[800px] flex items-end justify-center z-10 pb-4 md:pb-16">
+      <section className="relative w-full h-[500px] md:h-screen flex items-end md:items-center justify-center z-10">
         <div className="absolute inset-0 z-0">
           <Image 
             src="/hero-index.jpg"
@@ -42,7 +42,7 @@ export default function Home() {
         </div>
 
         <motion.div 
-          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-2 md:gap-8 items-end md:h-full"
+          className="relative md:relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end md:grid md:grid-cols-12 gap-2 md:gap-8 items-end md:h-full pb-10 md:pb-32"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
