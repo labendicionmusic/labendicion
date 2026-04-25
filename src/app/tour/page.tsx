@@ -6,35 +6,12 @@ import { motion } from 'framer-motion';
 
 const tourDates = [
   {
-    month: 'Oct',
-    day: '12',
-    city: 'Bogotá, Colombia',
-    venue: 'Movistar Arena',
-    status: 'Boletos',
-    soldOut: false
-  },
-  {
-    month: 'Oct',
-    day: '15',
-    city: 'Medellín, Colombia',
-    venue: 'Atanasio Girardot',
-    status: 'Boletos',
-    soldOut: false
-  },
-  {
-    month: 'Nov',
-    day: '02',
+    month: 'Abr',
+    day: '29',
     city: 'CDMX, México',
-    venue: 'Auditorio Nacional',
-    status: 'Agotado',
-    soldOut: true
-  },
-  {
-    month: 'Nov',
-    day: '18',
-    city: 'Miami, USA',
-    venue: 'Kaseya Center',
+    venue: 'Tonal',
     status: 'Boletos',
+    url: 'https://www.tonaltonal.com/events/la-bendicion',
     soldOut: false
   }
 ];
@@ -83,7 +60,7 @@ export default function TourPage() {
           className="mb-16 border-b border-outline-variant pb-8"
         >
           <div className="flex flex-wrap gap-4 items-center justify-center md:justify-start">
-            {['Global', 'Colombia', 'México', 'Venezuela', 'Cuba', 'USA', 'Europa'].map((region, i) => (
+            {['Global', 'México'].map((region, i) => (
               <button key={region} className={`px-6 py-2 font-mono text-xs uppercase tracking-[0.2em] font-bold transition-all duration-300 hover:text-primary ${
                 i === 0 
                   ? 'text-primary border-b-2 border-primary' 
@@ -128,51 +105,42 @@ export default function TourPage() {
                   </div>
                 </div>
                 
-                <button className={`w-full sm:w-auto font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 transition-all duration-300 whitespace-nowrap ${
-                  event.soldOut
-                    ? 'border border-secondary text-secondary hover:bg-secondary hover:text-black'
-                    : 'bg-primary text-black hover:bg-white hover:scale-105 shadow-[0_0_20px_rgba(0,255,157,0.2)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]'
-                }`}>
+                <a 
+                  href={event.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`w-full sm:w-auto font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 transition-all duration-300 whitespace-nowrap text-center ${
+                    event.soldOut
+                      ? 'border border-secondary text-secondary hover:bg-secondary hover:text-black pointer-events-none opacity-50'
+                      : 'bg-primary text-black hover:bg-white hover:scale-105 shadow-[0_0_20px_rgba(0,255,157,0.2)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]'
+                  }`}
+                >
                   {event.status}
-                </button>
+                </a>
               </motion.article>
             ))}
           </motion.div>
 
-          {/* Right Column: Interactive Map */}
+          {/* Right Column: Live Photo */}
           <motion.div 
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full lg:w-2/5 h-[500px] lg:h-[700px] sticky top-32 border border-outline-variant bg-surface-container relative flex items-center justify-center overflow-hidden grayscale contrast-125"
+            className="w-full lg:w-2/5 h-[500px] lg:h-[700px] sticky top-32 border border-outline-variant bg-surface-container relative flex items-center justify-center overflow-hidden"
           >
             <Image 
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF89dQYjLCQaF1suuNTTFKX1iB1YzH6oYGtGFR96kNGmso0ya5-buvS56n6qkhJnNv-auOjGAIAsdvq8x5Xg7TZGoxyDSKXrban9kRNOkujeJm2CUR67VNkoLqfuLBTmvgSTTJ_-uFkbrFp8q0RFdwg16JgMynp8Kx7xUyjXSUVwtjlRAwp_wZu_2iO11CLlT2ktBidIULxf8Aud9_qW95X1KTHMmKAhobVRYnVQ13Qex9uEdFNoIfxdTXV-yVzu4leziqSzMRYHc" 
-              alt="Global Tour Map" 
+              src="/tour-live.jpg" 
+              alt="La Bendición Live" 
               fill 
-              className="object-cover opacity-30 mix-blend-screen" 
+              className="object-cover opacity-50 grayscale hover:opacity-70 transition-opacity duration-700" 
             />
             <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background opacity-80"></div>
             
-            {/* Map Pins - Neon */}
-            <div className="absolute top-[35%] left-[25%] animate-pulse">
-              <span className="material-symbols-outlined text-primary text-3xl drop-shadow-[0_0_10px_rgba(0,255,157,0.8)]">emergency</span>
-            </div>
-            <div className="absolute top-[50%] left-[50%] animate-pulse" style={{ animationDelay: '0.5s' }}>
-              <span className="material-symbols-outlined text-secondary text-5xl drop-shadow-[0_0_15px_rgba(255,94,0,0.8)]">emergency</span>
-            </div>
-            <div className="absolute top-[25%] left-[65%] animate-pulse" style={{ animationDelay: '1s' }}>
-              <span className="material-symbols-outlined text-primary text-2xl drop-shadow-[0_0_10px_rgba(0,255,157,0.8)]">emergency</span>
-            </div>
-
-            {/* Radar Sweep Effect (CSS overlay) */}
-            <div className="absolute inset-0 rounded-full border border-primary/20 scale-[2] pointer-events-none animate-[spin_10s_linear_infinite] [mask-image:conic-gradient(transparent_80%,black_100%)]"></div>
-
-            {/* Map Legend */}
-            <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md p-8 border-t border-outline-variant">
-              <h4 className="font-mono text-sm uppercase tracking-[0.2em] font-bold text-primary mb-2">Objetivo Fijado</h4>
-              <p className="font-sans text-on-surface-variant text-sm font-light">
-                Destrucción global inminente. Más de 15 ciudades comprometidas por la ola Afrocaribeña.
+            {/* Live Info Legend */}
+            <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-md p-8 border-t border-outline-variant">
+              <h4 className="font-mono text-sm uppercase tracking-[0.2em] font-bold text-primary mb-2">PRÓXIMA PARADA: CDMX</h4>
+              <p className="font-sans text-on-surface-variant text-sm font-light leading-relaxed">
+                La Bendición llega a Tonal para una noche de salsa, sudor y ritmo. Prepárate para la experiencia completa en vivo.
               </p>
             </div>
           </motion.div>

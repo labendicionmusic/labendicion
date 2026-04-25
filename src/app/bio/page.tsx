@@ -29,25 +29,28 @@ export default function BioPage() {
           </p>
         </motion.header>
 
-        {/* Hero Image - Brutalist Duotone Poster */}
+        {/* Hero Image - Immersive Atmospheric Section */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
-          className="relative w-full h-[500px] md:h-[700px] rounded-none md:rounded-bl-[100px] md:rounded-tr-[100px] overflow-hidden mb-24 shadow-2xl border-2 border-primary bg-primary group"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+          className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[600px] md:h-[850px] overflow-hidden mb-24"
         >
           <Image
-            src="/hero-bendicion.jpg"
+            src="/bio-hero.jpg"
             alt="La Bendición en vivo"
             fill
-            className="object-cover grayscale contrast-150 mix-blend-multiply opacity-90 group-hover:opacity-100 transition-opacity duration-1000"
+            className="object-cover grayscale opacity-40 contrast-125 brightness-75"
             priority
           />
-          {/* Static Scanline Overlay */}
-          <div className="absolute inset-0 bg-[repeating-linear-gradient(transparent,transparent_2px,rgba(0,0,0,0.3)_2px,rgba(0,0,0,0.3)_4px)] pointer-events-none"></div>
+          
+          {/* Blend Gradients */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-background via-transparent to-background opacity-60"></div>
 
-          <div className="absolute bottom-6 right-6 border border-black px-4 py-1 text-black font-mono font-bold text-xs uppercase tracking-widest backdrop-blur-sm bg-primary/80">
-            ARCHIVO_01
+          {/* Minimal Archive Label */}
+          <div className="absolute bottom-12 left-12 md:left-24 font-mono text-[10px] uppercase tracking-[0.5em] text-white/30">
+            [ ARCHIVE_REF_23JSBV ]
           </div>
         </motion.div>
 

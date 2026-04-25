@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { socialLinks } from '../SocialIcons';
 
 export default function Footer() {
@@ -8,8 +9,13 @@ export default function Footer() {
       <div className="flex flex-col lg:flex-row justify-between items-center w-full px-8 py-16 gap-10 max-w-[1440px] mx-auto">
         
         {/* Brand */}
-        <div className="text-3xl font-black italic text-white tracking-tighter uppercase font-display">
-          LA BENDICIÓN
+        <div className="relative h-12 w-48 font-display">
+          <Image 
+            src="/logo-bendicion.svg" 
+            alt="La Bendición Logo" 
+            fill 
+            className="object-contain"
+          />
         </div>
         
         {/* Links */}

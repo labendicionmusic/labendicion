@@ -1,10 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function DiscografiaPage() {
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+
   const releases = [
     {
       id: 1,
@@ -23,6 +25,7 @@ export default function DiscografiaPage() {
       type: 'SENCILLO // NUEVO',
       description: 'El más reciente sencillo de la agrupación. Una advertencia con ritmo que fusiona la picardía caribeña con la energía urbana de la Ciudad de México.',
       spotifyUrl: 'https://open.spotify.com/album/5Svcfa7y1gKrdcRju04V24',
+      youtubeId: '2fXAj_6F5jw',
       tracks: ["Cuidao' Por Ahí"],
       isUpcoming: false
     },
@@ -43,6 +46,7 @@ export default function DiscografiaPage() {
       type: 'SENCILLO',
       description: 'Con una melodía envolvente y una letra que conecta con el corazón, "La Perla" evoca la nostalgia de los sonidos clásicos del Caribe de una manera contemporánea y fresca.',
       spotifyUrl: 'https://open.spotify.com/album/4PxciYwCkUh4hvFuzBrBWi',
+      youtubeId: 'zcyeXJZ-FRY',
       tracks: ['La Perla'],
       isUpcoming: false
     },
@@ -63,6 +67,7 @@ export default function DiscografiaPage() {
       type: 'SENCILLO',
       description: 'La calle como inspiración. Un tema que captura la energía cruda de las noches en la Ciudad de México, donde la salsa se encuentra con el asfalto.',
       spotifyUrl: 'https://open.spotify.com/album/3qsFIAREUFbGCMQ2181GAA',
+      youtubeId: '4rec5FL2Hz4',
       tracks: ['El Sonido De La Calle'],
       isUpcoming: false
     },
@@ -83,6 +88,7 @@ export default function DiscografiaPage() {
       type: 'EP // EN VIVO',
       description: 'Grabado en vivo en Estudios Noviembre, CDMX. La energía pura de la banda capturada sin filtros ni edición. Así suena La Bendición cuando nadie los detiene.',
       spotifyUrl: 'https://open.spotify.com/album/6h8Mcsb7ioG8aaeSG3KhON',
+      youtubeId: 'ORGb1YnevQo',
       tracks: [],
       isUpcoming: false
     },
@@ -168,12 +174,7 @@ export default function DiscografiaPage() {
                   : 'hover:bg-surface-container'
               } transition-colors duration-300`}
             >
-              <a 
-                href={release.spotifyUrl} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 w-full"
-              >
+              <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 w-full relative">
                 {/* Index Number */}
                 <div className="hidden md:block min-w-[60px]">
                   <span className="font-mono text-on-surface-variant/40 text-sm font-bold">
@@ -222,20 +223,88 @@ export default function DiscografiaPage() {
                   )}
                 </div>
 
-                {/* Play Icon */}
-                <div className={`min-w-[60px] flex items-center justify-center ${
-                  release.isUpcoming ? 'opacity-50' : ''
-                }`}>
-                  <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 group-hover:border-primary group-hover:bg-primary flex items-center justify-center transition-all duration-300">
-                    <span className="material-symbols-outlined text-white group-hover:text-black text-xl ml-0.5 transition-colors duration-300">
-                      {release.isUpcoming ? 'schedule' : 'play_arrow'}
-                    </span>
-                  </div>
+                {/* Actions Column */}
+                <div className="flex items-center gap-4 min-w-[120px] justify-end">
+                  {/* YouTube Action */}
+                  {!release.isUpcoming && release.youtubeId && (
+                    <button 
+                      onClick={() => setSelectedVideo(release.youtubeId!)}
+                      className="w-12 h-12 rounded-full border-2 border-secondary/30 text-secondary hover:border-secondary hover:bg-secondary hover:text-black flex items-center justify-center transition-all duration-300 group/video"
+                      aria-label={`Ver video de ${release.title}`}
+                    >
+                      <span className="material-symbols-outlined text-xl transition-transform group-hover/video:scale-110">
+                        smart_display
+                      </span>
+                    </button>
+                  )}
+
+                  {/* Spotify Action */}
+                  {!release.isUpcoming && (
+                    <a 
+                      href={release.spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group/play"
+                      aria-label={`Escuchar ${release.title} en Spotify`}
+                    >
+                      <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 group-hover/play:border-primary group-hover/play:bg-primary flex items-center justify-center transition-all duration-300">
+                        <span className="material-symbols-outlined text-white group-hover/play:text-black text-xl ml-0.5 transition-colors duration-300">
+                          play_arrow
+                        </span>
+                      </div>
+                    </a>
+                  )}
+                  
+                  {release.isUpcoming && (
+                    <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 flex items-center justify-center opacity-30">
+                      <span className="material-symbols-outlined text-white text-xl">schedule</span>
+                    </div>
+                  )}
                 </div>
-              </a>
+              </div>
             </motion.article>
           ))}
         </motion.div>
+
+        {/* Video Modal */}
+        <AnimatePresence>
+          {selectedVideo && (
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
+            >
+              <div 
+                className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+                onClick={() => setSelectedVideo(null)}
+              ></div>
+              
+              <motion.div 
+                initial={{ scale: 0.9, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.9, opacity: 0 }}
+                className="relative w-full max-w-[1200px] aspect-video bg-black shadow-2xl border border-white/10"
+              >
+                <button 
+                  onClick={() => setSelectedVideo(null)}
+                  className="absolute -top-12 right-0 text-white hover:text-primary flex items-center gap-2 font-mono text-sm uppercase tracking-widest transition-colors"
+                >
+                  <span className="material-symbols-outlined">close</span> Cerrar
+                </button>
+                
+                <iframe
+                  className="w-full h-full"
+                  src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                  title="YouTube video player"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Streaming CTA */}
         <motion.div 

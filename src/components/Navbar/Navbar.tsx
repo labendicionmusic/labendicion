@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { socialLinks } from '../SocialIcons';
 
 const navLinks = [
@@ -39,10 +40,16 @@ export default function Navbar() {
           {/* Brand */}
           <Link 
             href="/" 
-            className="text-2xl md:text-3xl font-black text-white italic font-display tracking-tight hover:text-primary transition-colors"
+            className="relative h-20 w-20 md:h-32 md:w-32 -my-4 md:-my-8 hover:scale-110 transition-all duration-300 z-50"
             onClick={() => setIsOpen(false)}
           >
-            LA BENDICIÓN
+            <Image 
+              src="/logo-bendicion.svg" 
+              alt="La Bendición Logo" 
+              fill 
+              className="object-contain drop-shadow-[0_0_15px_rgba(255,255,255,0.4)]"
+              priority
+            />
           </Link>
 
           {/* Desktop Navigation */}

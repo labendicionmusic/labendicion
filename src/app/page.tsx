@@ -59,9 +59,9 @@ export default function Home() {
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos. No escuches, <strong>siente</strong>.
             </p>
             <div className="flex flex-col gap-4 w-full sm:w-auto">
-              <button className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300">
+              <Link href="/discografia" className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
                 Escuchar Ahora
-              </button>
+              </Link>
               <Link href="/tour" className="border border-outline-variant text-white font-mono text-sm uppercase tracking-[0.2em] font-bold px-12 py-5 hover:border-primary hover:text-primary transition-all duration-300 text-center">
                 Tour '26
               </Link>
