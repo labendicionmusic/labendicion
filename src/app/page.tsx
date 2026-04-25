@@ -28,16 +28,27 @@ export default function Home() {
         <h1 className="font-display text-[15vw] font-black tracking-tighter text-white">LA BENDICIÓN</h1>
       </div>
 
-      {/* Kinetic Hero Section */}
-      <section className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12">
-        <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0">
-          <Image 
-            src="/hero-index.jpg"
-            alt="La Bendición Hero"
-            fill
-            className="object-cover opacity-90 contrast-110 object-top md:object-center"
-            priority
-          />
+      {/* Cinematic Hero Section */}
+      <section className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
+          {HERO_TYPE === 'image' ? (
+            <Image 
+              src="/hero-index.jpg"
+              alt="La Bendición Hero"
+              fill
+              className="object-cover opacity-90 contrast-110 object-top md:object-center"
+              priority
+            />
+          ) : (
+            <div className="absolute inset-0 w-full h-full pointer-events-none overflow-hidden scale-110 md:scale-125">
+              <iframe
+                src={`https://www.youtube.com/embed/${YOUTUBE_ID}?autoplay=1&mute=1&controls=0&loop=1&playlist=${YOUTUBE_ID}&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1`}
+                className="absolute top-1/2 left-1/2 w-[300%] h-[300%] md:w-[150%] md:h-[150%] -translate-x-1/2 -translate-y-1/2"
+                allow="autoplay; encrypted-media"
+                title="Hero Video Background"
+              />
+            </div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
         </div>
 

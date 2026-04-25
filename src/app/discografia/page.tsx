@@ -12,11 +12,11 @@ export default function DiscografiaPage() {
       id: 1,
       title: 'Vol 1.',
       year: '2026',
-      type: 'ÁLBUM // PRÓXIMAMENTE',
+      type: 'ÁLBUM',
       description: 'El primer álbum completo de La Bendición. La culminación de años de sencillos, presentaciones en vivo y una visión que ahora se materializa en un cuerpo de trabajo completo.',
       spotifyUrl: 'https://open.spotify.com/album/2dgIwDHlAmKP3E3jqjUS5e',
       tracks: [],
-      isUpcoming: true
+      isUpcoming: false
     },
     {
       id: 2,
