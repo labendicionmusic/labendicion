@@ -58,7 +58,16 @@ export default function Footer() {
 
       {/* Powered by Mhuri */}
       <div className="w-full border-t border-outline-variant/10 py-6 text-center text-on-surface-variant/30 text-[10px] uppercase tracking-[0.3em]">
-        Powered by <a href="https://www.mhuri.tech" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors duration-300 font-bold">Mhuri</a>
+        Powered by{' '}
+        <a
+          href="https://www.mhuri.tech"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-primary/60 font-black hover:text-primary transition-colors duration-300 inline-flex items-center gap-1"
+        >
+          MHURI
+          <span className="text-[8px] align-super">↗</span>
+        </a>
       </div>
     </footer>
   );
