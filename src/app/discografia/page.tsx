@@ -4,8 +4,17 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 
+function spotifyEmbedId(url: string) {
+  return url.split('/').pop()?.split('?')[0] ?? '';
+}
+
 export default function DiscografiaPage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [openEmbed, setOpenEmbed] = useState<number | null>(null);
+
+  function toggleEmbed(id: number) {
+    setOpenEmbed((prev) => (prev === id ? null : id));
+  }
 
   const releases = [
     {
@@ -238,7 +247,7 @@ export default function DiscografiaPage() {
                 <div className="flex items-center gap-4 min-w-[120px] justify-end">
                   {/* YouTube Action */}
                   {!release.isUpcoming && release.youtubeId && (
-                    <button 
+                    <button
                       onClick={() => setSelectedVideo(release.youtubeId!)}
                       className="w-12 h-12 rounded-full border-2 border-secondary/30 text-secondary hover:border-secondary hover:bg-secondary hover:text-black flex items-center justify-center transition-all duration-300 group/video"
                       aria-label={`Ver video de ${release.title}`}
@@ -249,23 +258,23 @@ export default function DiscografiaPage() {
                     </button>
                   )}
 
-                  {/* Spotify Action */}
+                  {/* Spotify Toggle */}
                   {!release.isUpcoming && (
-                    <a 
-                      href={release.spotifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="group/play"
-                      aria-label={`Escuchar ${release.title} en Spotify`}
+                    <button
+                      onClick={() => toggleEmbed(release.id)}
+                      className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-300 ${
+                        openEmbed === release.id
+                          ? 'border-primary bg-primary text-black'
+                          : 'border-outline-variant/30 text-white hover:border-primary hover:bg-primary hover:text-black'
+                      }`}
+                      aria-label={openEmbed === release.id ? `Cerrar player de ${release.title}` : `Escuchar ${release.title}`}
                     >
-                      <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 group-hover/play:border-primary group-hover/play:bg-primary flex items-center justify-center transition-all duration-300">
-                        <span className="material-symbols-outlined text-white group-hover/play:text-black text-xl ml-0.5 transition-colors duration-300">
-                          play_arrow
-                        </span>
-                      </div>
-                    </a>
+                      <span className="material-symbols-outlined text-xl ml-0.5 transition-colors duration-300">
+                        {openEmbed === release.id ? 'keyboard_arrow_up' : 'play_arrow'}
+                      </span>
+                    </button>
                   )}
-                  
+
                   {release.isUpcoming && (
                     <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 flex items-center justify-center opacity-30">
                       <span className="material-symbols-outlined text-white text-xl">schedule</span>
@@ -273,6 +282,32 @@ export default function DiscografiaPage() {
                   )}
                 </div>
               </div>
+
+              {/* Spotify Embed Accordion */}
+              <AnimatePresence initial={false}>
+                {openEmbed === release.id && (
+                  <motion.div
+                    key={`embed-${release.id}`}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: 'auto', opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: 'easeInOut' }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-8 md:px-10 pb-6">
+                      <iframe
+                        src={`https://open.spotify.com/embed/album/${spotifyEmbedId(release.spotifyUrl)}?utm_source=generator&theme=0`}
+                        width="100%"
+                        height="152"
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="border-0"
+                        title={`Spotify player — ${release.title}`}
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </motion.article>
           ))}
         </motion.div>
