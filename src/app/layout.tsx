@@ -35,18 +35,21 @@ const notoSerif = Noto_Serif({
   display: 'swap',
 });
 
+const BASE_URL = 'https://labendicion.mhuri.tech';
+
 export const metadata: Metadata = {
   title: "La Bendición | La Nueva Ola de la Salsa Afrocaribeña Contemporánea",
   description: "Descubre a La Bendición, la agrupación que fusiona la tradición de la salsa con el sonido urbano contemporáneo. Explora nuestra música, merch oficial y tour 2026.",
-  metadataBase: new URL('https://labendicion.mhuri.tech'),
+  metadataBase: new URL(BASE_URL),
+  robots: { index: true, follow: true },
   openGraph: {
     title: "La Bendición | La Nueva Ola de la Salsa Contemporánea",
     description: "Salsa, sudor y ritmo. Conoce la propuesta musical que está revolucionando la escena afrocaribeña desde Ciudad de México y La Habana.",
-    url: '/',
+    url: BASE_URL,
     siteName: 'La Bendición',
     images: [
       {
-        url: '/og-image.jpg',
+        url: `${BASE_URL}/og-image.jpg`,
         width: 1200,
         height: 630,
         alt: 'La Bendición - La Nueva Ola de la Salsa',
@@ -59,7 +62,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'La Bendición | La Nueva Ola de la Salsa',
     description: 'Salsa contemporánea fusionada con el sonido urbano. Ciudad de México - La Habana.',
-    images: ['/og-image.jpg'],
+    images: [`${BASE_URL}/og-image.jpg`],
   },
   icons: {
     icon: '/favicon-black.svg',
@@ -76,8 +79,28 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${beVietnamPro.variable} ${epilogue.variable} ${splineSans.variable} ${notoSerif.variable}`}>
       <head>
-        {/* Material Symbols for consistent iconography */}
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'MusicGroup',
+              name: 'La Bendición',
+              description: 'Grupo de salsa afrocaribeña contemporánea desde México. Fusión de tradición caribeña con sonidos urbanos.',
+              genre: ['Salsa', 'Afrocaribbean', 'Latin', 'Urban Latin'],
+              url: BASE_URL,
+              image: `${BASE_URL}/og-image.jpg`,
+              sameAs: [
+                'https://open.spotify.com/artist/12Q80WdWl4ubLTb7SYzX4K',
+                'https://youtube.com/@labendicionmusic',
+                'https://www.tiktok.com/@labendicionmusic',
+                'https://www.instagram.com/labendicionofficial',
+                'https://music.apple.com/us/artist/la-bendici%C3%B3n/1705054677',
+              ],
+            }),
+          }}
+        />
       </head>
       <body className="bg-background text-on-background min-h-screen flex flex-col font-sans selection:bg-primary-container selection:text-on-primary-container">
         <Navbar />
