@@ -36,6 +36,10 @@
 
 /* Base Styles */
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   * {
     box-sizing: border-box;
     padding: 0;

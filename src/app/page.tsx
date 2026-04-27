@@ -1,44 +1,100 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 // --- CONFIGURACIÓN DEL HERO ---
-// Cambia a 'video' para activar el fondo de YouTube, o 'image' para la foto estática.
-const HERO_TYPE: 'image' | 'video' = 'video'; 
-const YOUTUBE_ID = 'nuClYq_09vE'; 
+const HERO_TYPE: 'image' | 'video' = 'video';
+const YOUTUBE_ID = 'nuClYq_09vE';
 // ------------------------------
 
-export default function Home() {
-  // Animation variants
-  const fadeInUp = {
-    hidden: { opacity: 0, y: 40 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" as const } }
-  };
+const featuredReleases = [
+  {
+    title: 'Vol 1.',
+    year: '2026',
+    type: 'ÁLBUM',
+    description: 'La culminación de años de sencillos. El primer álbum completo de La Bendición.',
+    spotifyUrl: 'https://open.spotify.com/album/2dgIwDHlAmKP3E3jqjUS5e',
+    youtubeId: null as string | null,
+  },
+  {
+    title: "Cuidao' Por Ahí",
+    year: '2026',
+    type: 'SENCILLO // NUEVO',
+    description: 'Una advertencia con ritmo. Picardía caribeña con la energía urbana de la Ciudad de México.',
+    spotifyUrl: 'https://open.spotify.com/album/5Svcfa7y1gKrdcRju04V24',
+    youtubeId: '2fXAj_6F5jw' as string | null,
+  },
+  {
+    title: 'La Perla',
+    year: '2025',
+    type: 'SENCILLO',
+    description: 'Con una melodía envolvente que evoca la nostalgia de los sonidos clásicos del Caribe.',
+    spotifyUrl: 'https://open.spotify.com/album/4PxciYwCkUh4hvFuzBrBWi',
+    youtubeId: 'zcyeXJZ-FRY' as string | null,
+  },
+];
 
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2 }
-    }
-  };
+const fadeInUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: 'easeOut' as const } },
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
+};
+
+function SectionHeader({
+  label,
+  title,
+  subtitle,
+}: {
+  label: string;
+  title: React.ReactNode;
+  subtitle?: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -50 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: '-100px' }}
+      transition={{ duration: 0.8 }}
+      className="mb-16 border-l-8 border-primary pl-8"
+    >
+      <p className="font-mono text-xs uppercase tracking-[0.4em] font-bold text-primary mb-3">{label}</p>
+      <h2 className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-white tracking-tighter uppercase leading-[0.85]">
+        {title}
+      </h2>
+      {subtitle && (
+        <p className="font-mono text-xs uppercase tracking-[0.4em] font-bold text-on-surface-variant mt-4">
+          {subtitle}
+        </p>
+      )}
+    </motion.div>
+  );
+}
+
+export default function Home() {
+  const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
 
   return (
-    <div className="w-full bg-background overflow-hidden selection:bg-primary selection:text-black">
-      
+    <div className="w-full bg-background overflow-x-hidden selection:bg-primary selection:text-black">
+
       {/* Brutalist Watermark */}
       <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full whitespace-nowrap opacity-[0.03] pointer-events-none z-0 overflow-hidden mix-blend-screen">
         <h1 className="font-display text-[15vw] font-black tracking-tighter text-white">LA BENDICIÓN</h1>
       </div>
 
-      {/* Cinematic Hero Section */}
-      <section className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12 overflow-hidden">
+      {/* ═══════════════════════════════════════════
+          01 · HERO
+      ═══════════════════════════════════════════ */}
+      <section id="inicio" className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
-            <Image 
+            <Image
               src="/hero-index.jpg"
               alt="La Bendición Hero"
               fill
@@ -58,7 +114,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
         </div>
 
-        <motion.div 
+        <motion.div
           className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end h-full md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:pb-12"
           initial="hidden"
           animate="visible"
@@ -70,39 +126,49 @@ export default function Home() {
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Salvaje.</span>
             </h1>
           </motion.div>
-          
+
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right border-l md:border-l-0 md:border-r-4 border-primary pl-6 md:pl-0 md:pr-6">
             <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-4 md:mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
             </p>
             <div className="flex flex-col gap-4 w-full md:w-auto mt-2">
-              <Link href="/discografia" className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center">
+              <a
+                href="#musica"
+                className="bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center"
+              >
                 Escuchar Ahora
-              </Link>
-              <Link href="/tour" className="border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:text-black transition-all duration-300 text-center">
-                Tour '26
-              </Link>
+              </a>
+              <a
+                href="#tour"
+                className="border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:text-black transition-all duration-300 text-center"
+              >
+                Tour &apos;26
+              </a>
             </div>
           </motion.div>
         </motion.div>
       </section>
 
-      {/* Asymmetric Roots Collage */}
-      <section className="py-32 relative z-10 border-t border-outline-variant/30">
+      {/* ═══════════════════════════════════════════
+          02 · SANGRE MEZCLADA / NOSOTROS
+      ═══════════════════════════════════════════ */}
+      <section id="nosotros" className="py-32 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
+            viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.8 }}
             className="mb-24 md:pl-24"
           >
-            <h2 className="font-display text-5xl md:text-8xl font-black text-white uppercase tracking-tighter">Sangre <br/><span className="text-outline-variant">Mezclada</span></h2>
+            <h2 className="font-display text-5xl md:text-8xl font-black text-white uppercase tracking-tighter">
+              Sangre <br /><span className="text-outline-variant">Mezclada</span>
+            </h2>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 w-full">
-            {/* Left Column: Massive Kinetic Typography */}
-            <motion.div 
+            {/* Left Column: Kinetic Typography */}
+            <motion.div
               className="md:col-span-7 bg-surface-container border border-outline-variant/30 p-12 lg:p-20 flex flex-col justify-center relative overflow-hidden group"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -110,42 +176,35 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
-              
               <h3 className="font-display text-4xl text-on-surface-variant font-bold uppercase tracking-tight mb-8">Nuestra Identidad</h3>
-              
               <div className="flex flex-col gap-0 font-display text-4xl sm:text-6xl md:text-8xl lg:text-[7rem] font-black leading-[0.8] uppercase tracking-tighter">
                 <span className="text-white hover:text-primary transition-colors duration-300">TRADICIÓN</span>
                 <span className="text-outline-variant hover:text-secondary transition-colors duration-300">&amp;</span>
                 <span className="text-white hover:text-primary transition-colors duration-300">MODERNIDAD</span>
               </div>
-              
               <p className="font-sans text-xl text-on-surface-variant font-light mt-12 max-w-xl">
                 Evocamos la nostalgia de los sonidos clásicos del Caribe que durante décadas han conmovido a generaciones.
               </p>
             </motion.div>
 
-            {/* Right Column: Split Bento Boxes */}
+            {/* Right Column: Bento Boxes */}
             <div className="md:col-span-5 flex flex-col gap-8">
-              
-              {/* Top Box: Neon Primary (High Contrast) */}
-              <motion.div 
-                className="bg-primary p-10 lg:p-14 flex flex-col justify-between h-[50%] relative group overflow-hidden"
+              <motion.div
+                className="bg-primary p-10 lg:p-14 flex flex-col justify-between relative group overflow-hidden"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
               >
                 <div className="absolute left-0 top-0 w-full h-1 bg-white/50 -translate-y-full group-hover:translate-y-[400px] transition-transform duration-[2s] ease-in-out"></div>
-                
                 <h3 className="font-mono text-sm text-black uppercase tracking-[0.3em] font-black mb-8 border-b border-black/20 pb-4">La Misión</h3>
                 <h4 className="font-display text-4xl lg:text-5xl font-black text-black leading-[0.9] tracking-tighter uppercase">
                   Una nueva manera de hablar del <span className="text-white">amor</span> dentro de la música latina actual.
                 </h4>
               </motion.div>
 
-              {/* Bottom Box: Dark Variant */}
-              <motion.div 
-                className="bg-surface-variant p-10 lg:p-14 border border-outline-variant/30 flex flex-col justify-end h-[50%] relative"
+              <motion.div
+                className="bg-surface-variant p-10 lg:p-14 border border-outline-variant/30 flex flex-col justify-end relative"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -163,9 +222,449 @@ export default function Home() {
           </div>
         </div>
       </section>
-      
-      {/* Spacer to allow scrolling to see effects */}
-      <div className="h-32"></div>
+
+      {/* ═══════════════════════════════════════════
+          03 · HISTORIA / BIO TEASER
+      ═══════════════════════════════════════════ */}
+      <section id="bio" className="py-32 relative z-10 border-t border-outline-variant/30">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
+          <SectionHeader label="§ 01 — Historia" title="HISTORIA" subtitle="Nuestra Historia // La Nueva Ola" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            {/* Left: Narrative */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col gap-10"
+              variants={staggerContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-100px' }}
+            >
+              <motion.p variants={fadeInUp} className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed font-light">
+                <span className="float-left text-7xl md:text-9xl font-black text-primary pr-6 pt-2 leading-[0.8] tracking-tighter font-display">T</span>
+                odo comenzó en 2022. La Bendición no es solo una agrupación; somos la nueva ola de la salsa hecha en México, el resultado de un choque cultural hermoso entre las raíces afrocaribeñas y el sonido urbano contemporáneo.
+              </motion.p>
+
+              <motion.p variants={fadeInUp} className="font-sans text-lg text-on-surface-variant leading-relaxed font-light">
+                Buscamos revitalizar la riqueza de los ritmos clásicos del Caribe que durante décadas han conmovido a generaciones. Fusionamos esa nostalgia con un estilo fresco y poderoso para proponer una nueva manera de hablar del amor.
+              </motion.p>
+
+              <motion.blockquote variants={fadeInUp} className="relative pl-8 md:pl-12 border-l-4 border-secondary">
+                <p className="font-serif italic text-2xl md:text-3xl text-white leading-snug">
+                  &ldquo;No hacemos música para ser escuchada, hacemos música para ser sentida en el pecho y bailada con el espíritu.&rdquo;
+                </p>
+              </motion.blockquote>
+
+              <motion.p variants={fadeInUp} className="font-sans text-base text-on-surface-variant/70 leading-relaxed font-light">
+                Respaldados por productores de la talla de Geovanis Alcántara (3× Latin Grammy), Julián Bernal (2× nominado al Latin Grammy) y Gabriel Melgarejo.
+              </motion.p>
+
+              <motion.div variants={fadeInUp}>
+                <Link
+                  href="/bio"
+                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+                >
+                  Leer Historia Completa
+                  <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                </Link>
+              </motion.div>
+            </motion.div>
+
+            {/* Right: Bio Hero Image */}
+            <motion.div
+              className="lg:col-span-5 h-[500px] lg:h-[720px] relative overflow-hidden border border-outline-variant/30"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+            >
+              <Image
+                src="/bio-hero.jpg"
+                alt="La Bendición en vivo"
+                fill
+                className="object-cover contrast-110 hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
+              <div className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.5em] text-white/30">
+                [ ARCHIVE_REF_23JSBV ]
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          04 · MÚSICA / DISCOGRAFÍA TEASER
+      ═══════════════════════════════════════════ */}
+      <section id="musica" className="py-32 relative z-10 border-t border-outline-variant/30">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
+          <SectionHeader label="§ 02 — Discografía" title="MÚSICA" subtitle="Catálogo Oficial // Súbele al Volumen" />
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-wrap gap-8 md:gap-16 mb-16 pb-8 border-b border-outline-variant/30"
+          >
+            <div>
+              <span className="font-display text-4xl md:text-5xl font-black text-primary">10.3K</span>
+              <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">Oyentes Mensuales</span>
+            </div>
+            <div>
+              <span className="font-display text-4xl md:text-5xl font-black text-white">9</span>
+              <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">Lanzamientos</span>
+            </div>
+            <div>
+              <span className="font-display text-4xl md:text-5xl font-black text-secondary">2024–26</span>
+              <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">Años Activos</span>
+            </div>
+          </motion.div>
+
+          {/* Featured Releases */}
+          <motion.div
+            className="flex flex-col gap-0 mb-12"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            {featuredReleases.map((release, index) => (
+              <motion.article
+                key={release.title}
+                variants={fadeInUp}
+                className="group relative border-b border-outline-variant/20 hover:bg-surface-container transition-colors duration-300"
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-6 md:gap-12 p-8 md:p-10 w-full">
+                  <div className="hidden md:block min-w-[60px]">
+                    <span className="font-mono text-on-surface-variant/40 text-sm font-bold">{String(index + 1).padStart(2, '0')}</span>
+                  </div>
+                  <div className="min-w-[80px]">
+                    <span className="font-mono text-sm font-black tracking-widest text-secondary">{release.year}</span>
+                  </div>
+                  <div className="flex-grow">
+                    <div className="flex flex-wrap items-center gap-4 mb-2">
+                      <h3 className="font-display text-3xl md:text-4xl font-black uppercase tracking-tight leading-none text-white group-hover:text-primary transition-colors duration-300">
+                        {release.title}
+                      </h3>
+                      <span className="px-3 py-1 font-mono text-[10px] uppercase tracking-[0.15em] font-black border border-outline-variant text-on-surface-variant">
+                        {release.type}
+                      </span>
+                    </div>
+                    <p className="font-sans text-sm text-on-surface-variant font-light leading-relaxed max-w-2xl">{release.description}</p>
+                  </div>
+                  <div className="flex items-center gap-4 min-w-[120px] justify-end">
+                    {release.youtubeId && (
+                      <button
+                        onClick={() => setSelectedVideo(release.youtubeId)}
+                        className="w-12 h-12 rounded-full border-2 border-secondary/30 text-secondary hover:border-secondary hover:bg-secondary hover:text-black flex items-center justify-center transition-all duration-300"
+                        aria-label={`Ver video de ${release.title}`}
+                      >
+                        <span className="material-symbols-outlined text-xl">smart_display</span>
+                      </button>
+                    )}
+                    <a
+                      href={release.spotifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Escuchar ${release.title} en Spotify`}
+                    >
+                      <div className="w-12 h-12 rounded-full border-2 border-outline-variant/30 hover:border-primary hover:bg-primary flex items-center justify-center transition-all duration-300 group/play">
+                        <span className="material-symbols-outlined text-white group-hover/play:text-black text-xl ml-0.5 transition-colors duration-300">play_arrow</span>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </motion.article>
+            ))}
+          </motion.div>
+
+          {/* Streaming + CTA */}
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-8">
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="https://open.spotify.com/intl-es/artist/12Q80WdWl4ubLTb7SYzX4K"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-[#1DB954] text-black px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] font-black flex items-center gap-3 hover:bg-white transition-colors duration-300"
+              >
+                <svg className="w-4 h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.66 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.539-.12-.421.18-.78.54-.9 4.56-1.021 8.52-.6 11.64 1.32.42.18.479.659.301 1.02zm1.44-3.3c-.301.42-.841.6-1.262.3-3.239-1.98-8.159-2.58-11.939-1.38-.479.12-1.02-.12-1.14-.6-.12-.48.12-1.021.6-1.141C9.6 9.9 15 10.561 18.72 12.84c.361.181.54.78.241 1.2zm.12-3.36C15.24 8.4 8.82 8.16 5.16 9.301c-.6.179-1.2-.181-1.38-.721-.18-.601.18-1.2.72-1.381 4.26-1.26 11.28-1.02 15.721 1.621.539.3.719 1.02.419 1.56-.299.421-1.02.599-1.559.3z" />
+                </svg>
+                Spotify
+              </a>
+              <a
+                href="https://music.apple.com/us/artist/la-bendici%C3%B3n/1705054677"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-outline-variant text-white px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] font-bold hover:border-white hover:bg-white hover:text-black transition-all duration-300"
+              >
+                Apple Music
+              </a>
+              <a
+                href="https://youtube.com/@labendicionmusic"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="border border-outline-variant text-white px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] font-bold hover:border-[#FF0000] hover:bg-[#FF0000] transition-all duration-300"
+              >
+                YouTube
+              </a>
+            </div>
+            <Link
+              href="/discografia"
+              className="inline-flex items-center gap-3 text-primary font-mono text-sm uppercase tracking-[0.2em] font-black hover:text-white transition-colors duration-300 group/btn"
+            >
+              Ver Catálogo Completo
+              <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          05 · TOUR / EN VIVO TEASER
+      ═══════════════════════════════════════════ */}
+      <section id="tour" className="py-32 relative z-10 border-t border-outline-variant/30">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
+          <SectionHeader
+            label="§ 03 — En Vivo"
+            title={<>Tour <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">2026</span></>}
+          />
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            {/* Tour date + CTAs */}
+            <motion.div
+              className="lg:col-span-7 flex flex-col gap-8"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <article className="group relative bg-surface-container border border-outline-variant/30 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between transition-colors hover:bg-surface-variant overflow-hidden">
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary transform scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
+                <div className="flex flex-col sm:flex-row items-center gap-8 w-full sm:w-auto mb-6 sm:mb-0 text-center sm:text-left">
+                  <div className="min-w-[80px]">
+                    <span className="block text-secondary font-mono text-sm uppercase tracking-widest font-bold">Abr</span>
+                    <span className="block font-display text-7xl text-white font-black leading-none">29</span>
+                    <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">2026</span>
+                  </div>
+                  <div>
+                    <h3 className="font-display text-3xl text-white mb-2 font-bold uppercase tracking-tight">CDMX, México</h3>
+                    <p className="font-sans text-on-surface-variant font-light flex items-center gap-2">
+                      <span className="material-symbols-outlined text-[18px] text-primary">location_on</span>
+                      Tonal
+                    </p>
+                  </div>
+                </div>
+                <a
+                  href="https://www.tonaltonal.com/events/la-bendicion"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full sm:w-auto bg-primary text-black font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:scale-105 transition-all duration-300 whitespace-nowrap text-center shadow-[0_0_20px_rgba(0,255,157,0.2)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]"
+                >
+                  Boletos
+                </a>
+              </article>
+
+              <p className="font-sans text-on-surface-variant font-light leading-relaxed max-w-xl">
+                La Bendición llega a Tonal para una noche de salsa, sudor y ritmo. Prepárate para la experiencia completa en vivo.
+              </p>
+
+              <div>
+                <Link
+                  href="/tour"
+                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+                >
+                  Ver Todas las Fechas
+                  <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+                </Link>
+              </div>
+            </motion.div>
+
+            {/* Live Photo */}
+            <motion.div
+              className="lg:col-span-5 h-[400px] lg:h-[520px] relative overflow-hidden border border-outline-variant/30"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 1 }}
+            >
+              <Image
+                src="/tour-live.jpg"
+                alt="La Bendición Live"
+                fill
+                className="object-cover opacity-80 hover:opacity-100 transition-all duration-700 hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 opacity-70"></div>
+              <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md p-6 border-t border-outline-variant">
+                <h4 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-primary mb-1">PRÓXIMA PARADA: CDMX</h4>
+                <p className="font-sans text-on-surface-variant text-xs font-light">29 ABR — Tonal, Ciudad de México</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* ═══════════════════════════════════════════
+          06 · MERCH TEASER
+      ═══════════════════════════════════════════ */}
+      <section id="merch" className="py-32 relative z-10 border-t border-outline-variant/30">
+        <div className="w-full max-w-[1440px] mx-auto px-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
+            <SectionHeader
+              label="§ 04 — Tienda"
+              title={<>TEMPORADA <span className="text-primary">2026</span></>}
+              subtitle="Drop Oficial // Stock Limitado"
+            />
+            <Link
+              href="/merch"
+              className="hidden md:inline-flex items-center gap-3 text-primary font-mono text-sm uppercase tracking-[0.2em] font-black hover:text-white transition-colors duration-300 group/btn mb-4 shrink-0"
+            >
+              Ver Tienda Completa
+              <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+            </Link>
+          </div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-12 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-100px' }}
+          >
+            {/* Featured: LP */}
+            <motion.article
+              variants={fadeInUp}
+              className="md:col-span-7 bg-surface-container border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row group relative"
+            >
+              <div className="w-full md:w-1/2 relative overflow-hidden bg-black flex items-center justify-center p-8 min-h-[320px]">
+                <Image
+                  src="/merch-lp.jpg"
+                  alt="Vol. 1 LP"
+                  fill
+                  className="object-contain p-8 transition-transform duration-1000 group-hover:scale-110 drop-shadow-2xl grayscale group-hover:grayscale-0"
+                />
+                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
+                <span className="absolute top-6 left-6 bg-secondary text-white px-4 py-1 font-mono text-[10px] font-black uppercase tracking-[0.2em] z-10 animate-pulse">
+                  PIEZA MAESTRA
+                </span>
+              </div>
+              <div className="w-full md:w-1/2 p-10 flex flex-col justify-between bg-surface-container">
+                <div>
+                  <h2 className="font-display text-3xl lg:text-4xl font-black text-white uppercase tracking-tight mb-2">
+                    La Bendición — Vol. 1 LP
+                  </h2>
+                  <p className="font-sans text-sm text-on-surface-variant font-light leading-relaxed">
+                    Edición física limitada del primer álbum.
+                  </p>
+                </div>
+                <div className="flex items-center justify-between border-t border-outline-variant/30 pt-6 mt-6">
+                  <span className="font-mono font-black text-white text-3xl">$500 MXN</span>
+                  <Link
+                    href="/merch"
+                    className="bg-white text-black px-6 py-4 font-mono text-xs uppercase tracking-[0.2em] font-black flex items-center gap-2 hover:bg-primary transition-colors duration-300"
+                  >
+                    <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
+                    Comprar
+                  </Link>
+                </div>
+              </div>
+              <div className="absolute top-0 right-0 w-8 h-8 border-l border-b border-outline-variant bg-background z-10 pointer-events-none"></div>
+            </motion.article>
+
+            {/* Two stacked items */}
+            <div className="md:col-span-5 flex flex-col gap-8">
+              {[
+                { name: 'Playera "Agua bendita pa to el mundo"', price: '$450 MXN', image: '/merch-shirt.jpg', alt: 'Playera La Bendición' },
+                { name: 'Set 4 porta vasos "Vol. 1"', price: '$400 MXN', image: '/merch-coasters.jpg', alt: 'Set porta vasos Vol. 1' },
+              ].map((item) => (
+                <motion.article
+                  key={item.name}
+                  variants={fadeInUp}
+                  className="bg-surface-container border border-outline-variant/50 overflow-hidden flex group relative flex-1 min-h-[200px]"
+                >
+                  <div className="w-2/5 relative overflow-hidden bg-black flex items-center justify-center p-4">
+                    <Image
+                      src={item.image}
+                      alt={item.alt}
+                      fill
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                    />
+                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
+                  </div>
+                  <div className="w-3/5 p-6 flex flex-col justify-between">
+                    <h2 className="font-display text-xl font-black text-white uppercase tracking-tight leading-tight">{item.name}</h2>
+                    <div className="flex items-center justify-between border-t border-outline-variant/30 pt-4 mt-4">
+                      <span className="font-mono font-black text-white text-xl">{item.price}</span>
+                      <Link
+                        href="/merch"
+                        className="bg-white text-black px-4 py-3 font-mono text-[10px] uppercase tracking-[0.15em] font-black hover:bg-primary transition-colors duration-300"
+                      >
+                        Comprar
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="absolute top-0 right-0 w-6 h-6 border-l border-b border-outline-variant bg-background z-10 pointer-events-none"></div>
+                </motion.article>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Mobile CTA */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+            className="mt-12 flex md:hidden"
+          >
+            <Link
+              href="/merch"
+              className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+            >
+              Ver Tienda Completa
+              <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Video Modal */}
+      <AnimatePresence>
+        {selectedVideo && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-10"
+          >
+            <div
+              className="absolute inset-0 bg-black/95 backdrop-blur-xl"
+              onClick={() => setSelectedVideo(null)}
+            ></div>
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative w-full max-w-[1200px] aspect-video bg-black shadow-2xl border border-white/10"
+            >
+              <button
+                onClick={() => setSelectedVideo(null)}
+                className="absolute -top-12 right-0 text-white hover:text-primary flex items-center gap-2 font-mono text-sm uppercase tracking-widest transition-colors"
+              >
+                <span className="material-symbols-outlined">close</span> Cerrar
+              </button>
+              <iframe
+                className="w-full h-full"
+                src={`https://www.youtube.com/embed/${selectedVideo}?autoplay=1`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
