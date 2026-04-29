@@ -63,7 +63,7 @@ export default function BioPage() {
           >
             <p className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed mb-10 font-light">
               <span className="float-left text-7xl md:text-9xl font-black text-primary pr-6 pt-2 leading-[0.8] tracking-tighter">T</span>
-              odo comenzó en 2022. La Bendición no es solo una agrupación; somos la nueva ola de la salsa hecha en México, el resultado de un choque cultural hermoso entre las raíces afrocaribeñas y el sonido urbano contemporáneo.
+              odo comenzó en 2022. La Bendición no es solo una agrupación; somos la nueva ola de la <span className="text-secondary">salsa</span> hecha en México, el resultado de un choque cultural hermoso entre las raíces afrocaribeñas y el sonido urbano contemporáneo.
             </p>
             <p className="font-sans text-lg text-on-surface-variant leading-relaxed mb-16 font-light">
               Buscamos revitalizar la riqueza de los ritmos clásicos del Caribe que durante décadas han conmovido a generaciones. Fusionamos esa nostalgia con nuestro propio estilo fresco y poderoso para proponer una nueva manera de hablar del amor dentro de la música latina.
@@ -91,7 +91,7 @@ export default function BioPage() {
           >
             <h2 className="font-display text-4xl md:text-6xl font-black text-white uppercase tracking-tighter mb-8">Evolución Musical</h2>
             <p className="font-sans text-lg text-on-surface-variant leading-relaxed mb-6 font-light">
-              Al integrar metales ardientes, percusión profunda y ritmos urbanos, logramos forjar un sonido que desafía las fronteras. Nuestro compromiso es renovar la salsa con autenticidad, sensibilidad y estilo propio.
+              Al integrar metales ardientes, percusión profunda y ritmos urbanos, logramos forjar un sonido que desafía las fronteras. Nuestro compromiso es renovar la <span className="text-secondary">salsa</span> con autenticidad, sensibilidad y estilo propio.
             </p>
             <p className="font-sans text-lg text-on-surface-variant leading-relaxed font-light">
               Este nivel de excelencia nos ha llevado a colaborar con titanes de la industria. Nuestro sonido está respaldado por productores de la talla de Geovanis Alcántara (ganador de tres Latin Grammy), Julián Bernal (dos veces nominado al Latin Grammy) y Gabriel Melgarejo, consolidando nuestra propuesta a nivel mundial.

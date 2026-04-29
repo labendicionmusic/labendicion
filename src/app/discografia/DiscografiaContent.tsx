@@ -8,6 +8,17 @@ function spotifyEmbedId(url: string) {
   return url.split('/').pop()?.split('?')[0] ?? '';
 }
 
+const HIGHLIGHT_WORDS = ['salsa', 'pasión', 'romanticismo'];
+function highlight(text: string) {
+  const pattern = new RegExp(`(${HIGHLIGHT_WORDS.join('|')})`, 'gi');
+  const parts = text.split(pattern);
+  return parts.map((part, i) =>
+    HIGHLIGHT_WORDS.includes(part.toLowerCase())
+      ? <span key={i} className="text-secondary">{part}</span>
+      : part
+  );
+}
+
 export default function DiscografiaPage() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [openEmbed, setOpenEmbed] = useState<number | null>(null);
@@ -228,7 +239,7 @@ export default function DiscografiaPage() {
                     </span>
                   </div>
                   <p className="font-sans text-sm text-on-surface-variant font-light leading-relaxed max-w-2xl">
-                    {release.description}
+                    {highlight(release.description)}
                   </p>
                   
                   {/* Tracklist (only for EPs) */}

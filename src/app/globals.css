@@ -38,6 +38,9 @@
   --color-sky-retro: #6FA3B8;
   --color-olive: #3E4A3F;
   --color-bone: #F4F1EA;
+
+  /* Override white to bone white — aplica a todos los text-white del sitio */
+  --color-white: #F4F1EA;
 }
 
 /* Base Styles */

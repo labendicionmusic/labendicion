@@ -215,7 +215,7 @@ export default function Home() {
                 </div>
                 <h3 className="font-mono text-xs text-primary uppercase tracking-[0.2em] font-bold mb-4">El Sonido</h3>
                 <p className="font-sans text-xl text-white font-light leading-relaxed">
-                  Revitalizamos la riqueza de los ritmos afrocaribeños, fusionándolos con sonidos urbanos contemporáneos. Somos la nueva ola de salsa hecha en México.
+                  Revitalizamos la riqueza de los ritmos afrocaribeños, fusionándolos con sonidos urbanos contemporáneos. Somos la nueva ola de <span className="text-secondary">salsa</span> hecha en México.
                 </p>
               </motion.div>
             </div>
@@ -241,7 +241,7 @@ export default function Home() {
             >
               <motion.p variants={fadeInUp} className="font-serif text-xl md:text-2xl text-white/90 leading-relaxed font-light">
                 <span className="float-left text-7xl md:text-9xl font-black text-primary pr-6 pt-2 leading-[0.8] tracking-tighter font-display">T</span>
-                odo comenzó en 2022. La Bendición no es solo una agrupación; somos la nueva ola de la salsa hecha en México, el resultado de un choque cultural hermoso entre las raíces afrocaribeñas y el sonido urbano contemporáneo.
+                odo comenzó en 2022. La Bendición no es solo una agrupación; somos la nueva ola de la <span className="text-secondary">salsa</span> hecha en México, el resultado de un choque cultural hermoso entre las raíces afrocaribeñas y el sonido urbano contemporáneo.
               </motion.p>
 
               <motion.p variants={fadeInUp} className="font-sans text-lg text-on-surface-variant leading-relaxed font-light">
@@ -467,7 +467,7 @@ export default function Home() {
               </article>
 
               <p className="font-sans text-on-surface-variant font-light leading-relaxed max-w-xl">
-                La Bendición llega a Tonal para una noche de salsa, sudor y ritmo. Prepárate para la experiencia completa en vivo.
+                La Bendición llega a Tonal para una noche de <span className="text-secondary">salsa</span>, sudor y ritmo. Prepárate para la experiencia completa en vivo.
               </p>
 
               <div>

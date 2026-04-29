@@ -140,7 +140,7 @@ export default function TourPage() {
             <div className="absolute bottom-0 left-0 right-0 bg-black/90 backdrop-blur-md p-8 border-t border-outline-variant">
               <h4 className="font-mono text-sm uppercase tracking-[0.2em] font-bold text-primary mb-2">PRÓXIMA PARADA: CDMX</h4>
               <p className="font-sans text-on-surface-variant text-sm font-light leading-relaxed">
-                La Bendición llega a Tonal para una noche de salsa, sudor y ritmo. Prepárate para la experiencia completa en vivo.
+                La Bendición llega a Tonal para una noche de <span className="text-secondary">salsa</span>, sudor y ritmo. Prepárate para la experiencia completa en vivo.
               </p>
             </div>
           </motion.div>

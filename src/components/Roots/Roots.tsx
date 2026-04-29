@@ -15,7 +15,7 @@ const roots = [
   },
   {
     name: 'México',
-    description: 'La pasión cruda, los metales vibrantes y la flor viva.',
+    description: <>La <span className="text-secondary">pasión</span> cruda, los metales vibrantes y la flor viva.</>,
     image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDQmXgK2jV68M49_Uo07OItH5mH-W9-5m5G8rI0tUuI1_rR5mU5zP_y7T4T8aL0qM7h4pZ1JqTjR_nZ8U9y8O_t1QxY9K_Q9TzP8H3r6zQ7RjZ_xP_J9nI7_oZ5O9y_RjP_qM8T8lZ8m5U_G_kX7pZ8m5U_G_kX7pZ8m5U_G_kX7pZ8',
     accent: 'var(--secondary)',
   },

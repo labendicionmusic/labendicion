@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro, Playfair_Display, Spline_Sans, Noto_Serif } from "next/font/google";
+import { Be_Vietnam_Pro, Cormorant_Garamond, Spline_Sans, Noto_Serif } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
@@ -12,8 +12,8 @@ const beVietnamPro = Be_Vietnam_Pro({
   display: 'swap',
 });
 
-const playfairDisplay = Playfair_Display({
-  weight: ['400', '500', '600', '700', '800', '900'],
+const cormorantGaramond = Cormorant_Garamond({
+  weight: ['400', '500', '600', '700'],
   style: ['normal', 'italic'],
   subsets: ['latin'],
   variable: '--font-playfair',
@@ -77,7 +77,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="es" className={`${beVietnamPro.variable} ${playfairDisplay.variable} ${splineSans.variable} ${notoSerif.variable}`}>
+    <html lang="es" className={`${beVietnamPro.variable} ${cormorantGaramond.variable} ${splineSans.variable} ${notoSerif.variable}`}>
       <head>
         <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
         <script
