@@ -140,9 +140,10 @@ export default function Home() {
               </a>
               <a
                 href="#tour"
-                className="border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:text-black transition-all duration-300 text-center"
+                className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
               >
                 Tour &apos;26
+                <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
               </a>
             </div>
           </motion.div>
@@ -261,7 +262,7 @@ export default function Home() {
               <motion.div variants={fadeInUp}>
                 <Link
                   href="/bio"
-                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
                 >
                   Leer Historia Completa
                   <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
@@ -412,7 +413,7 @@ export default function Home() {
             </div>
             <Link
               href="/discografia"
-              className="inline-flex items-center gap-3 text-primary font-mono text-sm uppercase tracking-[0.2em] font-black hover:text-white transition-colors duration-300 group/btn"
+              className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
             >
               Ver Catálogo Completo
               <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
@@ -473,7 +474,7 @@ export default function Home() {
               <div>
                 <Link
                   href="/tour"
-                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+                  className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
                 >
                   Ver Todas las Fechas
                   <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
@@ -518,7 +519,7 @@ export default function Home() {
             />
             <Link
               href="/merch"
-              className="hidden md:inline-flex items-center gap-3 text-primary font-mono text-sm uppercase tracking-[0.2em] font-black hover:text-white transition-colors duration-300 group/btn mb-4 shrink-0"
+              className="hidden md:inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn mb-4 shrink-0"
             >
               Ver Tienda Completa
               <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
@@ -620,7 +621,7 @@ export default function Home() {
           >
             <Link
               href="/merch"
-              className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:text-black transition-all duration-300 group/btn"
+              className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
             >
               Ver Tienda Completa
               <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
