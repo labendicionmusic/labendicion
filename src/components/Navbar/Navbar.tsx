@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { socialLinks } from '../SocialIcons';
+import CartIcon from '@/components/Cart/CartIcon';
 
 const navLinks = [
   { name: 'Inicio', href: '/', sectionId: '' },
@@ -122,6 +123,9 @@ export default function Navbar() {
                 {link.icon}
               </a>
             ))}
+
+            {/* Cart Icon */}
+            <CartIcon />
 
             {/* Mobile Menu Button */}
             <button

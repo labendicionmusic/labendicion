@@ -4,6 +4,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import AudioPlayer from "@/components/Player/AudioPlayer";
+import { CartProvider } from "@/context/CartContext";
+import CartDrawer from "@/components/Cart/CartDrawer";
 
 const beVietnamPro = Be_Vietnam_Pro({
   weight: ['300', '400', '500', '600', '700'],
@@ -103,12 +105,15 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-on-background min-h-screen flex flex-col font-sans selection:bg-primary-container selection:text-on-primary-container">
-        <Navbar />
-        <main className="flex-grow w-full">
-          {children}
-        </main>
-        <Footer />
-        {/* AudioPlayer could be injected here or conditionally loaded */}
+        <CartProvider>
+          <Navbar />
+          <main className="flex-grow w-full">
+            {children}
+          </main>
+          <Footer />
+          <CartDrawer />
+          {/* AudioPlayer could be injected here or conditionally loaded */}
+        </CartProvider>
       </body>
     </html>
   );

@@ -3,6 +3,12 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import AddToCartButton from '@/components/Cart/AddToCartButton';
+
+const SHOPIFY_CONFIGURED = !!(
+  process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN &&
+  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN
+);
 
 export default function MerchPage() {
   const categories = ['Todo', 'Música', 'Ropa', 'Accesorios'];
@@ -15,7 +21,9 @@ export default function MerchPage() {
       description: '',
       image: '/merch-lp.webp',
       isFeatured: true,
-      badge: 'PIEZA MAESTRA'
+      badge: 'PIEZA MAESTRA',
+      shopifyVariantId: '', // Agregar cuando llegue el API key
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
     },
     {
       id: 2,
@@ -23,7 +31,9 @@ export default function MerchPage() {
       price: '$450 MXN',
       description: '',
       image: '/merch-shirt.jpg',
-      isFeatured: false
+      isFeatured: false,
+      shopifyVariantId: '',
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
     },
     {
       id: 3,
@@ -31,7 +41,9 @@ export default function MerchPage() {
       price: '$350 MXN',
       description: 'Gorra 100% gabardina deslavada con broche de belcro.',
       image: '/merch-cap-black.jpg',
-      isFeatured: false
+      isFeatured: false,
+      shopifyVariantId: '',
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
     },
     {
       id: 4,
@@ -39,7 +51,9 @@ export default function MerchPage() {
       price: '$350 MXN',
       description: 'Gorra 100% gabardina deslavada con broche de belcro.',
       image: '/merch-cap-grey.jpg',
-      isFeatured: false
+      isFeatured: false,
+      shopifyVariantId: '',
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
     },
     {
       id: 5,
@@ -47,7 +61,9 @@ export default function MerchPage() {
       price: '$350 MXN',
       description: 'Gorra 100% gabardina deslavada con broche de belcro.',
       image: '/merch-cap-orange.jpg',
-      isFeatured: false
+      isFeatured: false,
+      shopifyVariantId: '',
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
     },
     {
       id: 6,
@@ -55,8 +71,10 @@ export default function MerchPage() {
       price: '$400 MXN',
       description: 'Colección de 4 porta vasos "Vol. 1". El complemento ideal para tu zona de escucha.',
       image: '/merch-coasters.jpg',
-      isFeatured: false
-    }
+      isFeatured: false,
+      shopifyVariantId: '',
+      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
+    },
   ];
 
   const staggerContainer = {
@@ -171,10 +189,24 @@ export default function MerchPage() {
                   }`}>
                     {product.price}
                   </span>
-                  <button className="w-full sm:w-auto bg-white text-black px-8 py-4 font-mono text-xs uppercase tracking-[0.2em] font-black flex items-center justify-center gap-2 hover:bg-primary transition-colors duration-300">
-                    <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
-                    Comprar
-                  </button>
+
+                  {/* Carrito nativo cuando el API esté configurado; si no, va directo a Shopify */}
+                  {SHOPIFY_CONFIGURED && product.shopifyVariantId ? (
+                    <AddToCartButton
+                      variantId={product.shopifyVariantId}
+                      className="w-full sm:w-auto"
+                    />
+                  ) : (
+                    <a
+                      href={product.shopifyUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 border border-white/30 text-white font-mono text-xs uppercase tracking-[0.2em] font-black px-8 py-4 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
+                    >
+                      <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">shopping_bag</span>
+                      Comprar
+                    </a>
+                  )}
                 </div>
               </div>
 
