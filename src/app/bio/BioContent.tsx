@@ -40,7 +40,7 @@ export default function BioPage() {
             src="/bio-hero.jpg"
             alt="La Bendición en vivo"
             fill
-            className="object-cover contrast-110"
+            className="object-cover contrast-110 grayscale"
             priority
           />
           
