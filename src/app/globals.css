@@ -4,34 +4,40 @@
   /* Typography System */
   --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
   --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
-  --font-display: var(--font-epilogue), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
   --font-mono: var(--font-spline), ui-monospace, SFMono-Regular, monospace;
 
-  /* Color System - High Impact Dark Mode */
-  --color-primary: #00ff9d; /* Neon Emerald */
-  --color-on-primary: #000000;
-  --color-primary-container: #006d43;
-  --color-on-primary-container: #78fbb6;
-  
-  --color-secondary: #ff5e00; /* Fiery Orange */
-  --color-on-secondary: #ffffff;
-  --color-secondary-container: #a93100;
-  --color-on-secondary-container: #ffdbd0;
-  
-  --color-background: #09090b; /* Zinc 950 - Abismo */
-  --color-on-background: #ffffff;
-  
-  --color-surface: #09090b;
-  --color-on-surface: #ffffff;
-  --color-surface-variant: #18181b; /* Zinc 900 */
-  --color-on-surface-variant: #a1a1aa; /* Zinc 400 */
-  --color-outline: #27272a; /* Zinc 800 */
-  --color-outline-variant: #3f3f46; /* Zinc 700 */
+  /* Color System - Luxury Vintage */
+  --color-primary: #C6A75E;       /* Dorado vintage */
+  --color-on-primary: #0B0B0C;
+  --color-primary-container: #A88E4A; /* Dorado hover */
+  --color-on-primary-container: #F4F1EA;
+
+  --color-secondary: #7A1E1E;     /* Rojo vino */
+  --color-on-secondary: #F4F1EA;
+  --color-secondary-container: #5A1515;
+  --color-on-secondary-container: #F4F1EA;
+
+  --color-background: #0B0B0C;    /* Negro profundo */
+  --color-on-background: #F4F1EA; /* Blanco hueso */
+
+  --color-surface: #0B0B0C;
+  --color-on-surface: #F4F1EA;
+  --color-surface-variant: #2A2A2E;    /* Gris carbón */
+  --color-on-surface-variant: #a8a49c; /* Gris cálido */
+  --color-outline: #3E4A3F;            /* Verde oliva oscuro */
+  --color-outline-variant: #4A5A4B;    /* Verde oliva claro */
 
   --color-surface-container-lowest: #000000;
-  --color-surface-container-low: #09090b;
-  --color-surface-container: #18181b;
-  --color-surface-container-high: #27272a;
+  --color-surface-container-low: #0B0B0C;
+  --color-surface-container: #2A2A2E;  /* Gris carbón */
+  --color-surface-container-high: #3A3A3E;
+
+  /* Extended Palette */
+  --color-terracotta: #C47A5A;
+  --color-sky-retro: #6FA3B8;
+  --color-olive: #3E4A3F;
+  --color-bone: #F4F1EA;
 }
 
 /* Base Styles */
