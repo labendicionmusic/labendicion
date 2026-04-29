@@ -122,8 +122,8 @@ export default function Home() {
         >
           <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1">
             <h1 className="font-display text-xl sm:text-4xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
-              Agua bendita <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">pa to&apos; el mundo.</span>
+              La <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
             </h1>
           </motion.div>
 
