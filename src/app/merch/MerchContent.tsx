@@ -13,7 +13,7 @@ export default function MerchPage() {
       name: 'La Bendición - Vol. 1 LP',
       price: '$500 MXN',
       description: '',
-      image: '/merch-lp.jpg',
+      image: '/merch-lp.webp',
       isFeatured: true,
       badge: 'PIEZA MAESTRA'
     },

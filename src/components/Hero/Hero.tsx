@@ -11,7 +11,7 @@ export default function Hero() {
     <section className={styles.hero}>
       <div className={styles.imageWrapper}>
         <Image
-          src="/images/hero.png"
+          src="/images/hero.webp"
           alt="La Bendición Live Performance"
           fill
           priority

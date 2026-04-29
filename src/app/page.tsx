@@ -95,7 +95,7 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
             <Image
-              src="/hero-index.jpg"
+              src="/hero-index.webp"
               alt="La Bendición Hero"
               fill
               className="object-cover opacity-90 contrast-110 object-top md:object-center"
@@ -279,10 +279,10 @@ export default function Home() {
               transition={{ duration: 1 }}
             >
               <Image
-                src="/bio-hero.jpg"
+                src="/bio-landing.webp"
                 alt="La Bendición en vivo"
                 fill
-                className="object-cover contrast-110 hover:scale-105 transition-all duration-700 grayscale hover:grayscale-0"
+                className="object-cover object-top grayscale contrast-110 hover:scale-105 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-6 left-6 font-mono text-[10px] uppercase tracking-[0.5em] text-white/30">
@@ -491,7 +491,7 @@ export default function Home() {
               transition={{ duration: 1 }}
             >
               <Image
-                src="/tour-live.jpg"
+                src="/tour-live.webp"
                 alt="La Bendición Live"
                 fill
                 className="object-cover opacity-80 hover:opacity-100 transition-all duration-700 hover:scale-105 grayscale hover:grayscale-0"
@@ -540,7 +540,7 @@ export default function Home() {
             >
               <div className="w-full md:w-1/2 relative overflow-hidden bg-black flex items-center justify-center p-8 min-h-[320px]">
                 <Image
-                  src="/merch-lp.jpg"
+                  src="/merch-lp.webp"
                   alt="Vol. 1 LP"
                   fill
                   className="object-contain p-8 transition-transform duration-1000 group-hover:scale-110 drop-shadow-2xl grayscale group-hover:grayscale-0"

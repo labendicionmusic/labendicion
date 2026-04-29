@@ -37,7 +37,7 @@ export default function BioPage() {
           className="relative -mx-6 md:-mx-12 w-[calc(100%+3rem)] md:w-[calc(100%+6rem)] h-[300px] md:h-[850px] overflow-hidden mb-24"
         >
           <Image
-            src="/bio-hero.jpg"
+            src="/bio-hero.webp"
             alt="La Bendición en vivo"
             fill
             className="object-cover contrast-110 grayscale"

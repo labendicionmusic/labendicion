@@ -129,7 +129,7 @@ export default function TourPage() {
             className="w-full lg:w-2/5 h-[500px] lg:h-[700px] sticky top-32 border border-outline-variant bg-surface-container relative flex items-center justify-center overflow-hidden"
           >
             <Image 
-              src="/tour-live.jpg" 
+              src="/tour-live.webp" 
               alt="La Bendición Live" 
               fill 
               className="object-cover opacity-80 hover:opacity-100 transition-all duration-700 grayscale hover:grayscale-0" 

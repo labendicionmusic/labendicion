@@ -10,7 +10,7 @@ const roots = [
   {
     name: 'Colombia',
     description: 'El latido del tambor y el aroma a café que fluye por las venas.',
-    image: '/images/roots-colombia.png', // I'll copy the generated one here
+    image: '/images/roots-colombia.webp',
     accent: 'var(--primary)',
   },
   {
