@@ -15,12 +15,17 @@ const navLinks = [
   { name: 'Merch', href: '/#merch', sectionId: 'merch' },
 ];
 
+// Rutas que tienen su propio layout sin Navbar
+const STANDALONE_ROUTES = ['/labendicionvol1'];
+
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const pathname = usePathname();
   const isHomePage = pathname === '/';
+
+  if (STANDALONE_ROUTES.some((r) => pathname.startsWith(r))) return null;
 
   useEffect(() => {
     const handleScroll = () => {

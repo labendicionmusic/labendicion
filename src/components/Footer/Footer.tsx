@@ -1,9 +1,18 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePathname } from 'next/navigation';
 import { socialLinks } from '../SocialIcons';
 
+// Rutas que tienen su propio layout sin Footer
+const STANDALONE_ROUTES = ['/labendicionvol1'];
+
 export default function Footer() {
+  const pathname = usePathname();
+  if (STANDALONE_ROUTES.some((r) => pathname.startsWith(r))) return null;
+
   return (
     <footer className="w-full border-t border-outline-variant/30 bg-black font-mono text-xs mt-auto">
       <div className="flex flex-col lg:flex-row justify-between items-center w-full px-8 py-16 gap-10 max-w-[1440px] mx-auto">
