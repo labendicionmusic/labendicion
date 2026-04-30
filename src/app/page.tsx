@@ -527,7 +527,7 @@ export default function Home() {
             viewport={{ once: true, margin: '-100px' }}
           >
             {[
-              { src: '/merch-lp.webp',       alt: 'Vol. 1 LP',     badge: 'PIEZA MAESTRA' },
+              { src: '/merch-lp.webp',       alt: 'Vol. 1 LP',     badge: 'NUESTRO LP' },
               { src: '/merch-shirt.jpg',      alt: 'Playera',       badge: null },
               { src: '/merch-cap-black.jpg',  alt: 'Gorra Negra',   badge: null },
               { src: '/merch-coasters.jpg',   alt: 'Porta vasos',   badge: null },
