@@ -135,7 +135,7 @@ export default function Home() {
             <div className="flex flex-row gap-3 md:flex-col md:gap-4 md:w-auto">
               <a
                 href="#musica"
-                className="bg-primary text-black font-mono text-xs md:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-black px-6 md:px-12 py-4 md:py-5 hover:bg-white hover:scale-105 transition-all duration-300 text-center whitespace-nowrap"
+                className="inline-flex items-center justify-center bg-primary text-black font-mono text-xs md:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-black px-6 md:px-12 py-4 md:py-5 hover:bg-white hover:scale-105 transition-all duration-300 whitespace-nowrap"
               >
                 Escuchar
               </a>
