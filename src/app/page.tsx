@@ -91,11 +91,8 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           01 · HERO
       ═══════════════════════════════════════════ */}
-      {/* MOBILE: layout en dos bloques — video arriba, contenido abajo */}
-      <section id="inicio" className="relative w-full z-10 overflow-hidden">
-
-        {/* Video — ocupa 55vh en mobile, pantalla completa en desktop */}
-        <div className="relative w-full h-[55vh] md:h-screen overflow-hidden bg-black">
+      <section id="inicio" className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-8 md:pb-12 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
             <Image
               src="/hero-index.webp"
@@ -114,62 +111,35 @@ export default function Home() {
               />
             </div>
           )}
-          {/* Gradiente solo en desktop — en mobile se corta limpio */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent md:to-background hidden md:block"></div>
-
-          {/* Contenido desktop — posicionado sobre el video */}
-          <motion.div
-            className="hidden md:grid absolute inset-0 z-10 px-6 w-full max-w-[1440px] mx-auto grid-cols-12 gap-8 items-end pb-12"
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp} className="col-span-8">
-              <h1 className="font-display text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
-                La <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
-              </h1>
-            </motion.div>
-            <motion.div variants={fadeInUp} className="col-span-4 flex flex-col items-end text-right border-r-4 border-primary pr-6">
-              <p className="font-sans text-xl text-on-surface-variant font-light leading-relaxed mb-8 max-w-sm">
-                Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
-              </p>
-              <div className="flex flex-col gap-4">
-                <a href="#musica" className="inline-flex items-center justify-center bg-primary text-black font-mono text-sm uppercase tracking-[0.2em] font-black px-12 py-5 hover:bg-white hover:scale-105 transition-all duration-300">Escuchar Ahora</a>
-                <a href="#tour" className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn">
-                  Tour &apos;26
-                  <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-                </a>
-              </div>
-            </motion.div>
-          </motion.div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/80"></div>
         </div>
 
-        {/* Contenido mobile — en el bloque negro bajo el video */}
         <motion.div
-          className="md:hidden px-6 pt-6 pb-10 bg-background w-full"
+          className="relative z-10 px-6 w-full max-w-[1440px] mx-auto flex flex-col justify-end h-full md:grid md:grid-cols-12 gap-1 md:gap-8 items-end md:pb-12"
           initial="hidden"
           animate="visible"
           variants={staggerContainer}
         >
-          <motion.h1
-            variants={fadeInUp}
-            className="font-display text-5xl text-white leading-[0.85] font-black tracking-tighter uppercase mb-4"
-          >
-            La <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
-          </motion.h1>
-          <motion.p variants={fadeInUp} className="font-sans text-sm text-on-surface-variant font-light leading-relaxed mb-6">
-            Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
-          </motion.p>
-          <motion.div variants={fadeInUp} className="flex flex-row gap-3">
-            <a href="#musica" className="inline-flex items-center justify-center bg-primary text-black font-mono text-xs uppercase tracking-[0.15em] font-black px-6 py-4 hover:bg-white transition-all duration-300 whitespace-nowrap">
-              Escuchar
-            </a>
-            <a href="#tour" className="inline-flex items-center gap-2 border border-white/30 text-white font-mono text-xs uppercase tracking-[0.15em] font-black px-6 py-4 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn whitespace-nowrap">
-              Tour &apos;26
-              <span className="material-symbols-outlined text-[16px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-            </a>
+          <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1 w-full">
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase text-left">
+              La <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
+            </h1>
+          </motion.div>
+
+          <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right md:border-r-4 border-primary md:pr-6 mt-3 md:mt-0 w-full">
+            <p className="font-serif italic text-base md:text-xl text-white/80 font-light leading-relaxed mb-5 md:mb-8">
+              Agua bendita pa to&apos; el mundo
+            </p>
+            <div className="flex flex-row gap-3 md:flex-col md:gap-4">
+              <a href="#musica" className="inline-flex items-center justify-center bg-primary text-black font-mono text-xs md:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-black px-6 md:px-12 py-4 md:py-5 hover:bg-white hover:scale-105 transition-all duration-300 whitespace-nowrap">
+                Escuchar
+              </a>
+              <a href="#tour" className="inline-flex items-center gap-2 border border-white/30 text-white font-mono text-xs md:text-sm uppercase tracking-[0.15em] md:tracking-[0.2em] font-black px-6 md:px-10 py-4 md:py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn whitespace-nowrap">
+                Tour &apos;26
+                <span className="material-symbols-outlined text-[16px] md:text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
+              </a>
+            </div>
           </motion.div>
         </motion.div>
       </section>
@@ -177,7 +147,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           02 · SANGRE MEZCLADA / NOSOTROS
       ═══════════════════════════════════════════ */}
-      <section id="nosotros" className="pt-8 pb-32 md:py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="nosotros" className="py-16 md:py-24 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
@@ -251,7 +221,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           03 · HISTORIA / BIO TEASER
       ═══════════════════════════════════════════ */}
-      <section id="bio" className="py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="bio" className="py-16 md:py-24 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
           <SectionHeader label="§ 01 — Historia" title="HISTORIA" subtitle="Nuestra Historia // La Nueva Ola" />
 
@@ -320,7 +290,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           04 · MÚSICA / DISCOGRAFÍA TEASER
       ═══════════════════════════════════════════ */}
-      <section id="musica" className="py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="musica" className="py-16 md:py-24 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
           <SectionHeader label="§ 02 — Discografía" title="MÚSICA" subtitle="Catálogo Oficial // Súbele al Volumen" />
 
@@ -449,7 +419,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           05 · TOUR / EN VIVO TEASER
       ═══════════════════════════════════════════ */}
-      <section id="tour" className="py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="tour" className="py-16 md:py-24 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
           <SectionHeader
             label="§ 03 — En Vivo"
@@ -533,7 +503,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           06 · MERCH TEASER
       ═══════════════════════════════════════════ */}
-      <section id="merch" className="py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="merch" className="py-16 md:py-24 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
 
           <SectionHeader
