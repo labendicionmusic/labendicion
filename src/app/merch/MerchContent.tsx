@@ -3,218 +3,121 @@
 import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import AddToCartButton from '@/components/Cart/AddToCartButton';
 
-const SHOPIFY_CONFIGURED = !!(
-  process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN &&
-  process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_TOKEN
-);
+const SHOPIFY_URL = 'https://labendicionmusic.com';
+
+const previews = [
+  { src: '/merch-lp.webp',        alt: 'Vol. 1 LP' },
+  { src: '/merch-shirt.jpg',      alt: 'Playera' },
+  { src: '/merch-cap-black.jpg',  alt: 'Gorra Negra' },
+  { src: '/merch-coasters.jpg',   alt: 'Porta vasos' },
+];
 
 export default function MerchPage() {
-  const categories = ['Todo', 'Música', 'Ropa', 'Accesorios'];
-  
-  const products = [
-    {
-      id: 1,
-      name: 'La Bendición - Vol. 1 LP',
-      price: '$500 MXN',
-      description: '',
-      image: '/merch-lp.webp',
-      isFeatured: true,
-      badge: 'PIEZA MAESTRA',
-      shopifyVariantId: '', // Agregar cuando llegue el API key
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-    {
-      id: 2,
-      name: 'Playera "Agua bendita pa to el mundo"',
-      price: '$450 MXN',
-      description: '',
-      image: '/merch-shirt.jpg',
-      isFeatured: false,
-      shopifyVariantId: '',
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-    {
-      id: 3,
-      name: 'Gorra "LB" (Negra)',
-      price: '$350 MXN',
-      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
-      image: '/merch-cap-black.jpg',
-      isFeatured: false,
-      shopifyVariantId: '',
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-    {
-      id: 4,
-      name: 'Gorra "LB" (Gris)',
-      price: '$350 MXN',
-      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
-      image: '/merch-cap-grey.jpg',
-      isFeatured: false,
-      shopifyVariantId: '',
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-    {
-      id: 5,
-      name: 'Gorra Naranja "Rumba"',
-      price: '$350 MXN',
-      description: 'Gorra 100% gabardina deslavada con broche de belcro.',
-      image: '/merch-cap-orange.jpg',
-      isFeatured: false,
-      shopifyVariantId: '',
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-    {
-      id: 6,
-      name: 'Set 4 porta vasos "Vol. 1"',
-      price: '$400 MXN',
-      description: 'Colección de 4 porta vasos "Vol. 1". El complemento ideal para tu zona de escucha.',
-      image: '/merch-coasters.jpg',
-      isFeatured: false,
-      shopifyVariantId: '',
-      shopifyUrl: 'https://1xhyed-ae.myshopify.com',
-    },
-  ];
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.1 }
-    }
-  };
-
-  const popIn = {
-    hidden: { opacity: 0, scale: 0.9 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5, ease: "easeOut" as const } }
-  };
-
   return (
-    <div className="w-full pt-32 pb-32 bg-background min-h-screen text-on-background selection:bg-secondary selection:text-white">
-      
-      {/* Brutalist Watermark */}
-      <div className="fixed top-[20%] right-0 whitespace-nowrap opacity-[0.02] pointer-events-none z-0 overflow-hidden mix-blend-screen origin-bottom-right -rotate-90">
-        <h1 className="font-display text-[15vw] font-black tracking-tighter text-white">MERCH</h1>
+    <div className="w-full min-h-screen bg-background text-on-background flex flex-col">
+
+      {/* Watermark */}
+      <div className="fixed top-[20%] right-0 whitespace-nowrap opacity-[0.02] pointer-events-none z-0 overflow-hidden origin-bottom-right -rotate-90">
+        <span className="font-display text-[15vw] font-black tracking-tighter text-white">MERCH</span>
       </div>
 
-      <main className="w-full max-w-[1440px] mx-auto px-6 relative z-10">
-        
-        {/* Header */}
-        <motion.header 
-          initial={{ opacity: 0, y: 50 }}
+      {/* Hero CTA */}
+      <main className="flex-1 flex flex-col items-center justify-center px-6 pt-32 pb-24 relative z-10">
+
+        {/* Label */}
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mb-16 flex flex-col md:flex-row md:items-end justify-between border-b border-outline-variant pb-8 gap-8"
+          transition={{ duration: 0.6 }}
+          className="font-mono text-xs uppercase tracking-[0.5em] text-primary font-bold mb-6"
         >
-          <div>
-            <h1 className="font-display text-5xl md:text-7xl font-black text-white tracking-tighter uppercase leading-none">
-              TEMPORADA <span className="text-primary">2026</span>
-            </h1>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-on-surface-variant mt-4 font-bold">
-              Drop Oficial // Stock Limitado
-            </p>
-          </div>
-          
-          {/* Filters */}
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat, i) => (
-              <button 
-                key={cat} 
-                className={`px-6 py-2 font-mono text-xs uppercase tracking-[0.1em] font-bold transition-all duration-300 ${
-                  i === 0 
-                    ? 'bg-white text-black' 
-                    : 'bg-transparent text-on-surface-variant border border-outline-variant hover:border-white hover:text-white'
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-        </motion.header>
+          Drop Oficial // Temporada 2026
+        </motion.p>
 
-        {/* Merch Grid */}
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-12 gap-8 auto-rows-[minmax(400px,auto)]"
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="font-display text-6xl md:text-8xl lg:text-[10rem] font-black text-white tracking-tighter uppercase leading-none text-center mb-6"
         >
-          {products.map((product) => (
-            <motion.article 
-              key={product.id} 
-              variants={popIn}
-              className={`${
-                product.isFeatured ? 'md:col-span-8 md:flex-row' : 'md:col-span-4 flex-col'
-              } bg-surface-container border border-outline-variant/50 overflow-hidden flex group relative`}
+          Viste la<br />
+          <span className="text-primary">Bendición</span>
+        </motion.h1>
+
+        {/* Subline */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          className="font-serif italic text-xl md:text-2xl text-on-surface-variant text-center max-w-lg mb-14"
+        >
+          Stock limitado. Piezas que cargan el ritmo.
+        </motion.p>
+
+        {/* CTA Button */}
+        <motion.a
+          href={SHOPIFY_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="inline-flex items-center gap-4 bg-primary text-black font-mono text-sm uppercase tracking-[0.3em] font-black px-14 py-6 hover:bg-primary-container transition-all duration-300 group"
+        >
+          <span className="material-symbols-outlined text-[22px]">shopping_bag</span>
+          Ir a la Tienda
+          <span className="material-symbols-outlined text-[22px] group-hover:translate-x-2 transition-transform duration-300">arrow_forward</span>
+        </motion.a>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.7 }}
+          className="font-mono text-[10px] uppercase tracking-[0.3em] text-on-surface-variant/40 mt-6"
+        >
+          labendicionmusic.com
+        </motion.p>
+
+        {/* Product Previews */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.5 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-24 w-full max-w-4xl"
+        >
+          {previews.map((item, i) => (
+            <motion.a
+              key={item.src}
+              href={SHOPIFY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + i * 0.1 }}
+              className="relative aspect-square overflow-hidden border border-outline-variant/30 group bg-surface-container"
             >
-              {/* Image Container */}
-              <div className={`${
-                product.isFeatured ? 'w-full md:w-1/2 h-[400px] md:h-full' : 'w-full h-[320px]'
-              } relative overflow-hidden bg-black flex items-center justify-center p-8`}>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-contain p-8 transition-transform duration-1000 group-hover:scale-110 drop-shadow-2xl grayscale group-hover:grayscale-0"
-                />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
-                
-                {product.badge && (
-                  <span className="absolute top-6 left-6 bg-secondary text-white px-4 py-1 font-mono text-[10px] font-black uppercase tracking-[0.2em] z-10 animate-pulse">
-                    {product.badge}
-                  </span>
-                )}
-              </div>
-              
-              {/* Content Container */}
-              <div className={`${
-                product.isFeatured ? 'w-full md:w-1/2 p-10 md:p-14' : 'p-8 flex-grow'
-              } flex flex-col justify-between bg-surface-container`}>
-                <div>
-                  <h2 className={`font-display font-black text-white uppercase tracking-tight mb-2 ${
-                    product.isFeatured ? 'text-4xl lg:text-5xl' : 'text-2xl'
-                  }`}>
-                    {product.name}
-                  </h2>
-                  <p className="font-sans text-sm text-on-surface-variant leading-relaxed mb-8 font-light">
-                    {product.description}
-                  </p>
-                </div>
-                
-                {/* Price & Action */}
-                <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 w-full border-t border-outline-variant/30 pt-6">
-                  <span className={`font-mono font-black text-white ${
-                    product.isFeatured ? 'text-4xl' : 'text-2xl'
-                  }`}>
-                    {product.price}
-                  </span>
-
-                  {/* Carrito nativo cuando el API esté configurado; si no, va directo a Shopify */}
-                  {SHOPIFY_CONFIGURED && product.shopifyVariantId ? (
-                    <AddToCartButton
-                      variantId={product.shopifyVariantId}
-                      className="w-full sm:w-auto"
-                    />
-                  ) : (
-                    <a
-                      href={product.shopifyUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 border border-white/30 text-white font-mono text-xs uppercase tracking-[0.2em] font-black px-8 py-4 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
-                    >
-                      <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">shopping_bag</span>
-                      Comprar
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Neo-brutalist decorative corner */}
-              <div className="absolute top-0 right-0 w-8 h-8 border-l border-b border-outline-variant bg-background z-10 pointer-events-none"></div>
-            </motion.article>
+              <Image
+                src={item.src}
+                alt={item.alt}
+                fill
+                className="object-contain p-6 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            </motion.a>
           ))}
         </motion.div>
+
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1 }}
+          className="font-mono text-[10px] uppercase tracking-[0.3em] text-on-surface-variant/30 mt-8 text-center"
+        >
+          Click en cualquier pieza para ver la tienda completa
+        </motion.p>
+
       </main>
     </div>
   );
