@@ -91,7 +91,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           01 · HERO
       ═══════════════════════════════════════════ */}
-      <section id="inicio" className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12 overflow-hidden">
+      <section id="inicio" className="relative w-full h-[95vh] md:h-screen flex items-end justify-center z-10 pb-12 md:pb-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
             <Image
@@ -148,22 +148,21 @@ export default function Home() {
               </a>
             </div>
           </motion.div>
-        {/* Scroll indicator — solo mobile */}
-        <motion.div
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 md:hidden z-20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-        >
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">Scroll</span>
-          <motion.span
-            className="material-symbols-outlined text-white/50 text-[24px]"
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
+          {/* Scroll indicator — solo mobile, dentro del flujo debajo de botones */}
+          <motion.div
+            className="md:hidden flex flex-col items-start gap-1 mt-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5, duration: 0.8 }}
           >
-            keyboard_arrow_down
-          </motion.span>
-        </motion.div>
+            <motion.span
+              className="material-symbols-outlined text-white/40 text-[28px]"
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
+            >
+              keyboard_arrow_down
+            </motion.span>
+          </motion.div>
         </motion.div>
       </section>
 
