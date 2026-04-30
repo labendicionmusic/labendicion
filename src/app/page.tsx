@@ -91,7 +91,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           01 · HERO
       ═══════════════════════════════════════════ */}
-      <section id="inicio" className="relative w-full h-[85vh] md:h-screen flex items-end justify-center z-10 pb-6 md:pb-12 overflow-hidden">
+      <section id="inicio" className="relative w-full h-[70vh] md:h-screen flex items-end justify-center z-10 pb-6 md:pb-12 overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
             <Image
@@ -111,7 +111,7 @@ export default function Home() {
               />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/20 to-background"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/80 md:to-background"></div>
         </div>
 
         <motion.div
@@ -169,7 +169,7 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           02 · SANGRE MEZCLADA / NOSOTROS
       ═══════════════════════════════════════════ */}
-      <section id="nosotros" className="pt-12 pb-32 md:py-32 relative z-10 border-t border-outline-variant/30">
+      <section id="nosotros" className="pt-8 pb-32 md:py-32 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
