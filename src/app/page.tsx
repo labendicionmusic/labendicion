@@ -148,6 +148,22 @@ export default function Home() {
               </a>
             </div>
           </motion.div>
+        {/* Scroll indicator — solo mobile */}
+        <motion.div
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 md:hidden z-20"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5, duration: 0.8 }}
+        >
+          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/40">Scroll</span>
+          <motion.span
+            className="material-symbols-outlined text-white/50 text-[24px]"
+            animate={{ y: [0, 8, 0] }}
+            transition={{ repeat: Infinity, duration: 1.4, ease: 'easeInOut' }}
+          >
+            keyboard_arrow_down
+          </motion.span>
+        </motion.div>
         </motion.div>
       </section>
 
