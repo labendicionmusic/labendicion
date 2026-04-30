@@ -511,122 +511,74 @@ export default function Home() {
       ═══════════════════════════════════════════ */}
       <section id="merch" className="py-32 relative z-10 border-t border-outline-variant/30">
         <div className="w-full max-w-[1440px] mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-16">
-            <SectionHeader
-              label="§ 04 — Tienda"
-              title={<>TEMPORADA <span className="text-primary">2026</span></>}
-              subtitle="Drop Oficial // Stock Limitado"
-            />
-            <Link
-              href="/merch"
-              className="hidden md:inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn mb-4 shrink-0"
-            >
-              Ver Tienda Completa
-              <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-            </Link>
-          </div>
 
+          <SectionHeader
+            label="§ 04 — Tienda"
+            title={<>TEMPORADA <span className="text-primary">2026</span></>}
+            subtitle="Drop Oficial // Stock Limitado"
+          />
+
+          {/* Product previews */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-12 gap-8"
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 mb-16"
             variants={staggerContainer}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, margin: '-100px' }}
           >
-            {/* Featured: LP */}
-            <motion.article
-              variants={fadeInUp}
-              className="md:col-span-7 bg-surface-container border border-outline-variant/50 overflow-hidden flex flex-col md:flex-row group relative"
-            >
-              <div className="w-full md:w-1/2 relative overflow-hidden bg-black flex items-center justify-center p-8 min-h-[320px]">
+            {[
+              { src: '/merch-lp.webp',       alt: 'Vol. 1 LP',     badge: 'PIEZA MAESTRA' },
+              { src: '/merch-shirt.jpg',      alt: 'Playera',       badge: null },
+              { src: '/merch-cap-black.jpg',  alt: 'Gorra Negra',   badge: null },
+              { src: '/merch-coasters.jpg',   alt: 'Porta vasos',   badge: null },
+            ].map((item) => (
+              <motion.a
+                key={item.src}
+                href="https://labendicionmusic.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                variants={fadeInUp}
+                className="relative aspect-square overflow-hidden border border-outline-variant/30 group bg-surface-container"
+              >
                 <Image
-                  src="/merch-lp.webp"
-                  alt="Vol. 1 LP"
+                  src={item.src}
+                  alt={item.alt}
                   fill
-                  className="object-contain p-8 transition-transform duration-1000 group-hover:scale-110 drop-shadow-2xl grayscale group-hover:grayscale-0"
+                  className="object-contain p-6 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
                 />
-                <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
-                <span className="absolute top-6 left-6 bg-secondary text-white px-4 py-1 font-mono text-[10px] font-black uppercase tracking-[0.2em] z-10 animate-pulse">
-                  PIEZA MAESTRA
-                </span>
-              </div>
-              <div className="w-full md:w-1/2 p-10 flex flex-col justify-between bg-surface-container">
-                <div>
-                  <h2 className="font-display text-3xl lg:text-4xl font-black text-white uppercase tracking-tight mb-2">
-                    La Bendición — Vol. 1 LP
-                  </h2>
-                  <p className="font-sans text-sm text-on-surface-variant font-light leading-relaxed">
-                    Edición física limitada del primer álbum.
-                  </p>
-                </div>
-                <div className="flex items-center justify-between border-t border-outline-variant/30 pt-6 mt-6">
-                  <span className="font-mono font-black text-white text-3xl">$500 MXN</span>
-                  <Link
-                    href="/merch"
-                    className="bg-white text-black px-6 py-4 font-mono text-xs uppercase tracking-[0.2em] font-black flex items-center gap-2 hover:bg-primary transition-colors duration-300"
-                  >
-                    <span className="material-symbols-outlined text-[18px]">shopping_bag</span>
-                    Comprar
-                  </Link>
-                </div>
-              </div>
-              <div className="absolute top-0 right-0 w-8 h-8 border-l border-b border-outline-variant bg-background z-10 pointer-events-none"></div>
-            </motion.article>
-
-            {/* Two stacked items */}
-            <div className="md:col-span-5 flex flex-col gap-8">
-              {[
-                { name: 'Playera "Agua bendita pa to el mundo"', price: '$450 MXN', image: '/merch-shirt.jpg', alt: 'Playera La Bendición' },
-                { name: 'Set 4 porta vasos "Vol. 1"', price: '$400 MXN', image: '/merch-coasters.jpg', alt: 'Set porta vasos Vol. 1' },
-              ].map((item) => (
-                <motion.article
-                  key={item.name}
-                  variants={fadeInUp}
-                  className="bg-surface-container border border-outline-variant/50 overflow-hidden flex group relative flex-1 min-h-[200px]"
-                >
-                  <div className="w-2/5 relative overflow-hidden bg-black flex items-center justify-center p-4">
-                    <Image
-                      src={item.image}
-                      alt={item.alt}
-                      fill
-                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
-                    />
-                    <div className="absolute inset-0 bg-primary/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 mix-blend-overlay"></div>
-                  </div>
-                  <div className="w-3/5 p-6 flex flex-col justify-between">
-                    <h2 className="font-display text-xl font-black text-white uppercase tracking-tight leading-tight">{item.name}</h2>
-                    <div className="flex items-center justify-between border-t border-outline-variant/30 pt-4 mt-4">
-                      <span className="font-mono font-black text-white text-xl">{item.price}</span>
-                      <Link
-                        href="/merch"
-                        className="bg-white text-black px-4 py-3 font-mono text-[10px] uppercase tracking-[0.15em] font-black hover:bg-primary transition-colors duration-300"
-                      >
-                        Comprar
-                      </Link>
-                    </div>
-                  </div>
-                  <div className="absolute top-0 right-0 w-6 h-6 border-l border-b border-outline-variant bg-background z-10 pointer-events-none"></div>
-                </motion.article>
-              ))}
-            </div>
+                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                {item.badge && (
+                  <span className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 font-mono text-[9px] font-black uppercase tracking-[0.2em] animate-pulse">
+                    {item.badge}
+                  </span>
+                )}
+              </motion.a>
+            ))}
           </motion.div>
 
-          {/* Mobile CTA */}
+          {/* CTA */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3, duration: 0.8 }}
-            className="mt-12 flex md:hidden"
+            transition={{ duration: 0.8 }}
+            className="flex flex-col sm:flex-row items-center gap-6"
           >
-            <Link
-              href="/merch"
-              className="inline-flex items-center gap-3 border border-white/30 text-white font-mono text-sm uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-sky-retro hover:text-black hover:border-sky-retro transition-all duration-300 group/btn"
+            <a
+              href="https://labendicionmusic.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 bg-primary text-black font-mono text-sm uppercase tracking-[0.3em] font-black px-12 py-5 hover:bg-primary-container transition-all duration-300 group"
             >
-              Ver Tienda Completa
-              <span className="material-symbols-outlined text-[18px] group-hover/btn:translate-x-1 transition-transform">arrow_forward</span>
-            </Link>
+              <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
+              Ir a la Tienda
+              <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+            </a>
+            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-on-surface-variant/40">
+              labendicionmusic.com
+            </p>
           </motion.div>
+
         </div>
       </section>
 
