@@ -91,8 +91,8 @@ export default function Home() {
       {/* ═══════════════════════════════════════════
           01 · HERO
       ═══════════════════════════════════════════ */}
-      <section id="inicio" className="relative w-full h-[80vh] md:h-screen flex items-end justify-center z-10 pb-8 md:pb-12 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-full z-0 overflow-hidden bg-black">
+      <section id="inicio" className="relative w-full h-[75vh] md:h-screen flex items-end justify-center z-10 pb-8 md:pb-12 overflow-hidden">
+        <div className="absolute top-0 left-0 w-full h-[400px] md:h-full z-0 overflow-hidden bg-black">
           {HERO_TYPE === 'image' ? (
             <Image
               src="/hero-index.webp"
@@ -111,7 +111,7 @@ export default function Home() {
               />
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/10 to-background/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background"></div>
         </div>
 
         <motion.div
@@ -120,15 +120,20 @@ export default function Home() {
           animate="visible"
           variants={staggerContainer}
         >
+          {/* Título — sobre el video en mobile y desktop */}
           <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1 w-full">
             <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase text-left">
               La <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
             </h1>
+            <p className="font-serif italic text-base text-white/70 font-light mt-3 md:hidden">
+              Agua bendita pa to&apos; el mundo
+            </p>
           </motion.div>
 
+          {/* Subtítulo + botones — desktop a la derecha, mobile abajo */}
           <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right md:border-r-4 border-primary md:pr-6 mt-3 md:mt-0 w-full">
-            <p className="font-serif italic text-base md:text-xl text-white/80 font-light leading-relaxed mb-5 md:mb-8">
+            <p className="hidden md:block font-serif italic text-xl text-white/80 font-light leading-relaxed mb-8">
               Agua bendita pa to&apos; el mundo
             </p>
             <div className="flex flex-row gap-3 md:flex-col md:gap-4">
