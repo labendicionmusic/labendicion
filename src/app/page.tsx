@@ -120,16 +120,15 @@ export default function Home() {
           animate="visible"
           variants={staggerContainer}
         >
-          {/* Título */}
-          <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1">
-            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase">
+          {/* Mobile: todo apilado a la izquierda | Desktop: grid 12 col */}
+          <motion.div variants={fadeInUp} className="md:col-span-8 md:col-start-1 w-full">
+            <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white leading-[0.85] font-black tracking-tighter uppercase text-left">
               La <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Bendición.</span>
             </h1>
           </motion.div>
 
-          {/* Subtítulo + Botones */}
-          <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right md:border-r-4 border-primary md:pr-6 mt-4 md:mt-0">
+          <motion.div variants={fadeInUp} className="md:col-span-4 md:col-start-9 flex flex-col items-start md:items-end text-left md:text-right md:border-r-4 border-primary md:pr-6 mt-4 md:mt-0 w-full">
             <p className="font-sans text-sm md:text-xl text-on-surface-variant font-light leading-relaxed mb-6 md:mb-8 max-w-sm">
               Salsa romántica y ritmos afrocaribeños fusionados con sonidos urbanos contemporáneos.
             </p>
