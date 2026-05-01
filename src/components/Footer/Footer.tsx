@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 import { socialLinks } from '../SocialIcons';
 
 // Rutas que tienen su propio layout sin Footer
-const STANDALONE_ROUTES = ['/labendicionvol1'];
+const STANDALONE_ROUTES = ['/labendicionvol1', '/booking'];
 
 export default function Footer() {
   const pathname = usePathname();

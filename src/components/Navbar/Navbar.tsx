@@ -16,7 +16,7 @@ const navLinks = [
 ];
 
 // Rutas que tienen su propio layout sin Navbar
-const STANDALONE_ROUTES = ['/labendicionvol1'];
+const STANDALONE_ROUTES = ['/labendicionvol1', '/booking'];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
