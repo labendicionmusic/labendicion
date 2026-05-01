@@ -641,8 +641,8 @@ export default function FYCPage() {
       </section>
 
       {/* ── FOOTER MINIMAL ──────────────────────────────────────── */}
-      <footer className="w-full border-t border-white/10 bg-black py-8 px-6">
-        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <footer className="w-full border-t border-white/10 bg-black px-6 pt-8 pb-6">
+        <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/5">
           <div className="flex items-center gap-3">
             <div className="relative h-6 w-6">
               <Image src="/logo-bendicion.svg" alt="La Bendición" fill className="object-contain" />
@@ -654,11 +654,13 @@ export default function FYCPage() {
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/50 text-center">
             For Your Consideration — Latin Grammy {new Date().getFullYear()}
           </span>
-          <a
-            href="/"
-            className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors"
-          >
+          <a href="/" className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">
             labendicionofficial.com
+          </a>
+        </div>
+        <div className="max-w-5xl mx-auto pt-4 text-center">
+          <a href="https://www.mhuri.tech" target="_blank" rel="noopener noreferrer" className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-primary transition-colors duration-300">
+            Powered by MHURI<span className="text-[8px] align-super">↗</span>
           </a>
         </div>
       </footer>
