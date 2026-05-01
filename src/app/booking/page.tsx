@@ -37,12 +37,11 @@ const VIDEOS = [
   { title: 'La Perla', youtubeId: 'zcyeXJZ-FRY' },
 ];
 
-// Spotify track IDs — TODO: reemplazar con IDs individuales de cada track
-// Para encontrarlos: abrir canción en Spotify → Share → Copy Song Link → el ID es el último segmento
+// IDs individuales de track en Spotify (Share → Copy Song Link → último segmento de la URL)
 const TRACKS = [
-  { title: 'Mal De Amor (feat. Camila Guevara)', spotifyId: 'TODO_track_id_mal_de_amor' },
-  { title: "Cuidao' Por Ahí", spotifyId: '5Svcfa7y1gKrdcRju04V24' },
-  { title: 'La Perla', spotifyId: '4PxciYwCkUh4hvFuzBrBWi' },
+  { title: 'Mal De Amor (feat. Camila Guevara)', spotifyId: '4AcyNygiBgJxwr35q0y1Jw' },
+  { title: "Cuidao' Por Ahí", spotifyId: '1J8LIzkxOYeb7kNwQ4Kwxp' },
+  { title: 'La Perla', spotifyId: '2twDC3NL2XA4AqLScXVInC' },
 ];
 
 const GALLERY: { src: string; alt: string; orientation: 'h' | 'v'; downloadable?: boolean }[] = [
@@ -58,8 +57,7 @@ const SETLIST: string[] = [
 ];
 
 const CALENDAR: { date: string; venue: string; city: string; tickets?: string }[] = [
-  // TODO: actualizar con fechas reales
-  { date: '— Por confirmar —', venue: '— Venue por confirmar —', city: 'Ciudad de México' },
+  { date: 'Abr 29, 2026', venue: 'Tonal', city: 'CDMX, México' },
 ];
 
 const CONTACTS = [
@@ -105,7 +103,7 @@ function YouTubeEmbed({ videoId, title }: { videoId: string; title: string }) {
 export default function BookingPage() {
   const [bioExpanded, setBioExpanded] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
-  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   return (
     <div className="w-full min-h-screen bg-background text-on-background overflow-x-hidden selection:bg-primary selection:text-black">
@@ -298,7 +296,7 @@ export default function BookingPage() {
                   {track.title}
                 </p>
                 <iframe
-                  src={`https://open.spotify.com/embed/album/${track.spotifyId}?utm_source=generator&theme=0`}
+                  src={`https://open.spotify.com/embed/track/${track.spotifyId}?utm_source=generator&theme=0`}
                   width="100%"
                   height="152"
                   allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
@@ -323,7 +321,7 @@ export default function BookingPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: i * 0.08 }}
-                onClick={() => setLightboxSrc(photo.src)}
+                onClick={() => setLightboxIndex(i)}
                 className={`relative overflow-hidden bg-surface-container border border-white/10 group ${
                   photo.orientation === 'v' ? 'aspect-[3/4]' : 'aspect-video'
                 }`}
@@ -532,7 +530,7 @@ export default function BookingPage() {
               La Bendición © {new Date().getFullYear()}
             </span>
           </div>
-          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20 text-center">
+          <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/50 text-center">
             Documento confidencial — solo para uso profesional
           </span>
           <a href="/" className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">
@@ -543,31 +541,56 @@ export default function BookingPage() {
 
       {/* ── LIGHTBOX ────────────────────────────────────────────── */}
       <AnimatePresence>
-        {lightboxSrc && (
+        {lightboxIndex !== null && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4"
-            onClick={() => setLightboxSrc(null)}
+            className="fixed inset-0 bg-black/97 z-[100] flex flex-col items-center justify-center p-4"
+            onClick={() => setLightboxIndex(null)}
           >
+            {/* Cerrar */}
             <button
-              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors"
-              onClick={() => setLightboxSrc(null)}
+              className="absolute top-4 right-4 text-white/60 hover:text-white transition-colors z-10"
+              onClick={() => setLightboxIndex(null)}
             >
               <span className="material-symbols-outlined text-4xl">close</span>
             </button>
-            <div className="relative max-w-4xl w-full max-h-[90vh] aspect-auto">
-              <Image
-                src={lightboxSrc}
-                alt="Foto de prensa"
-                fill
-                className="object-contain"
-              />
-            </div>
+
+            {/* Contador */}
+            <p className="absolute top-5 left-1/2 -translate-x-1/2 font-mono text-[10px] uppercase tracking-[0.4em] text-white/30">
+              {lightboxIndex + 1} / {GALLERY.length}
+            </p>
+
+            {/* Imagen */}
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={GALLERY[lightboxIndex].src}
+              alt={GALLERY[lightboxIndex].alt}
+              className="max-w-full max-h-[80vh] object-contain"
+              onClick={(e) => e.stopPropagation()}
+            />
+
+            {/* Anterior */}
+            <button
+              className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors p-2"
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + GALLERY.length) % GALLERY.length); }}
+            >
+              <span className="material-symbols-outlined text-5xl">chevron_left</span>
+            </button>
+
+            {/* Siguiente */}
+            <button
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white transition-colors p-2"
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % GALLERY.length); }}
+            >
+              <span className="material-symbols-outlined text-5xl">chevron_right</span>
+            </button>
+
+            {/* Descargar */}
             <a
-              href={lightboxSrc}
+              href={GALLERY[lightboxIndex].src}
               download
               onClick={(e) => e.stopPropagation()}
               className="absolute bottom-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 bg-primary text-black font-mono text-xs uppercase tracking-[0.25em] font-black px-6 py-3 hover:bg-white transition-all duration-300"
