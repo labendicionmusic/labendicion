@@ -17,8 +17,7 @@ const ARTIST = {
   since: '2022',
 };
 
-// TODO: subir el PDF del EPK completo a /public/epk-labendicion.pdf
-const EPK_PDF = '/epk-labendicion.pdf';
+const EPK_PDF = '/PRESSKIT + LIVE SHOW.pdf';
 
 const BIO_SHORT = [
   'La Bendición es una agrupación de salsa y música tropical contemporánea originaria de la Ciudad de México, integrada por personalidades de trayectoria reconocida en la industria. Su propuesta busca honrar la herencia de la música afrocaribeña mediante la fusión de sonidos urbanos con un estilo fresco, poderoso y original.',
@@ -46,14 +45,11 @@ const TRACKS = [
   { title: 'La Perla', spotifyId: '4PxciYwCkUh4hvFuzBrBWi' },
 ];
 
-// TODO: reemplazar con las fotos reales cuando las tengas
-// Al menos 2 horizontales (aspect-video) y 2 verticales (aspect-[3/4])
 const GALLERY: { src: string; alt: string; orientation: 'h' | 'v'; downloadable?: boolean }[] = [
-  { src: '/bio-hero.webp',     alt: 'La Bendición — Foto de prensa 1', orientation: 'h', downloadable: true },
-  { src: '/tour-live.webp',    alt: 'La Bendición — En vivo',          orientation: 'h', downloadable: true },
-  { src: '/bio-landing.webp',  alt: 'La Bendición — Foto de prensa 2', orientation: 'v', downloadable: true },
-  { src: '/hero-index.webp',   alt: 'La Bendición — Foto de prensa 3', orientation: 'v', downloadable: true },
-  // TODO: añadir más fotos aquí
+  { src: '/foto1.jpg', alt: 'La Bendición — Foto de prensa 1', orientation: 'h', downloadable: true },
+  { src: '/foto2.jpg', alt: 'La Bendición — Foto de prensa 2', orientation: 'h', downloadable: true },
+  { src: '/foto3.jpg', alt: 'La Bendición — Foto de prensa 3', orientation: 'v', downloadable: true },
+  { src: '/foto4.jpg', alt: 'La Bendición — Foto de prensa 4', orientation: 'v', downloadable: true },
 ];
 
 const SETLIST: string[] = [
