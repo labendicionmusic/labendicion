@@ -37,7 +37,7 @@ const notoSerif = Noto_Serif({
   display: 'swap',
 });
 
-const BASE_URL = 'https://labendicion.mhuri.tech';
+const BASE_URL = 'https://labendicionofficial.com';
 
 export const metadata: Metadata = {
   title: "La Bendición | La Nueva Ola de la Salsa Afrocaribeña Contemporánea",
