@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography System */
+  --font-sans: var(--font-be-vietnam), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-noto-serif), ui-serif, Georgia, serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-mono: var(--font-spline), ui-monospace, SFMono-Regular, monospace;
+
+  /* Color System - Luxury Vintage */
+  --color-primary: #C6A75E;       /* Dorado vintage */
+  --color-on-primary: #0B0B0C;
+  --color-primary-container: #A88E4A; /* Dorado hover */
+  --color-on-primary-container: #F4F1EA;
+
+  --color-secondary: #7A1E1E;     /* Rojo vino */
+  --color-on-secondary: #F4F1EA;
+  --color-secondary-container: #5A1515;
+  --color-on-secondary-container: #F4F1EA;
+
+  --color-background: #0B0B0C;    /* Negro profundo */
+  --color-on-background: #F4F1EA; /* Blanco hueso */
+
+  --color-surface: #0B0B0C;
+  --color-on-surface: #F4F1EA;
+  --color-surface-variant: #2A2A2E;    /* Gris carbón */
+  --color-on-surface-variant: #a8a49c; /* Gris cálido */
+  --color-outline: #3E4A3F;            /* Verde oliva oscuro */
+  --color-outline-variant: #4A5A4B;    /* Verde oliva claro */
+
+  --color-surface-container-lowest: #000000;
+  --color-surface-container-low: #0B0B0C;
+  --color-surface-container: #2A2A2E;  /* Gris carbón */
+  --color-surface-container-high: #3A3A3E;
+
+  /* Extended Palette */
+  --color-terracotta: #C47A5A;
+  --color-sky-retro: #6FA3B8;
+  --color-olive: #3E4A3F;
+  --color-bone: #F4F1EA;
+
+  /* Override white to bone white — aplica a todos los text-white del sitio */
+  --color-white: #F4F1EA;
+}
+
+/* Base Styles */
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-on-background);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    color: var(--color-on-surface);
+  }
+
+  /* Material Symbols Configuration */
+  .material-symbols-outlined {
+    font-family: 'Material Symbols Outlined';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Utility Gradients and Shadows for High Impact */
+  .text-gradient-primary {
+    background: linear-gradient(135deg, var(--color-secondary) 0%, var(--color-primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}

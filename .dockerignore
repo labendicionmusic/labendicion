@@ -1,0 +1,9 @@
+node_modules
+.next
+.git
+.gitignore
+*.md
+ARCHIVOSLABENDI
+reference
+src_backup_safe_light_theme
+.DS_Store
