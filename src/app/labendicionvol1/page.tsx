@@ -146,8 +146,10 @@ function AlbumCoverCrossfade({ alt }: { alt: string }) {
           src={src}
           alt={alt}
           fill
+          sizes="(max-width: 768px) 100vw, 50vw"
           className={`object-contain transition-opacity duration-1000 ${i === current ? 'opacity-100' : 'opacity-0'}`}
           priority={i === 0}
+          loading={i === 0 ? 'eager' : 'lazy'}
         />
       ))}
     </>
@@ -274,7 +276,7 @@ export default function FYCPage() {
       <div className="w-full bg-black border-b border-white/10 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center gap-3">
           <div className="relative h-8 w-8">
-            <Image src="/logo-bendicion.svg" alt="La Bendición" fill className="object-contain" />
+            <Image src="/logo-bendicion.svg" alt="La Bendición" fill sizes="32px" className="object-contain" />
           </div>
           <span className="font-mono text-xs uppercase tracking-[0.35em] text-white/60 hidden sm:block">
             La Bendición
@@ -644,6 +646,7 @@ export default function FYCPage() {
                   src={POSTER_SRC}
                   alt="Poster Oficial La Bendición Vol. 1"
                   fill
+                  sizes="(max-width: 768px) 80vw, 320px"
                   className="object-contain p-6"
                 />
               </div>
@@ -685,7 +688,7 @@ export default function FYCPage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/5">
           <div className="flex items-center gap-3">
             <div className="relative h-6 w-6">
-              <Image src="/logo-bendicion.svg" alt="La Bendición" fill className="object-contain" />
+              <Image src="/logo-bendicion.svg" alt="La Bendición" fill sizes="24px" className="object-contain" />
             </div>
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/40">
               La Bendición © {new Date().getFullYear()}
