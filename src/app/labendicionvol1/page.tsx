@@ -18,7 +18,7 @@ const ALBUM = {
 };
 
 // TODO: reemplazar con el ID del promo FYC de 1:30–2:00 cuando esté listo
-const FYC_PROMO_VIDEO_ID = 'F6Pk272OEJo';
+const FYC_PROMO_VIDEO_ID = 'nuClYq_09vE';
 
 const LAUNCH_VIDEO_ID = 'QMYZJRabbYA';
 
