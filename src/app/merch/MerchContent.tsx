@@ -12,10 +12,13 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
   const { addItem, isLoading, openCart } = useCart();
   const [adding, setAdding] = useState(false);
   const [selectedVariantIdx, setSelectedVariantIdx] = useState(0);
+  const [hovered, setHovered] = useState(false);
 
   const variants = product.variants.edges.map((e) => e.node);
   const selectedVariant = variants[selectedVariantIdx];
-  const image = product.featuredImage;
+  const images = product.images.edges.map((e) => e.node);
+  const image = images[0] ?? product.featuredImage;
+  const hoverImage = images[1] ?? null;
   const hasMultipleVariants = variants.length > 1 && variants[0].title !== 'Default Title';
 
   async function handleAddToCart() {
@@ -36,17 +39,30 @@ function ProductCard({ product }: { product: ShopifyProduct }) {
       viewport={{ once: true }}
       transition={{ duration: 0.6 }}
       className="flex flex-col bg-surface-container border border-outline-variant/30 group"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       {/* Imagen */}
       <div className="relative aspect-square overflow-hidden bg-black">
         {image ? (
-          <Image
-            src={image.url}
-            alt={image.altText ?? product.title}
-            fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            className="object-contain p-6 group-hover:scale-105 transition-all duration-700"
-          />
+          <>
+            <Image
+              src={image.url}
+              alt={image.altText ?? product.title}
+              fill
+              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              className={`object-contain p-6 transition-all duration-500 ${hovered && hoverImage ? 'opacity-0' : 'opacity-100 scale-100 group-hover:scale-105'}`}
+            />
+            {hoverImage && (
+              <Image
+                src={hoverImage.url}
+                alt={hoverImage.altText ?? product.title}
+                fill
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                className={`object-contain p-6 transition-all duration-500 ${hovered ? 'opacity-100 scale-105' : 'opacity-0 scale-100'}`}
+              />
+            )}
+          </>
         ) : (
           <div className="w-full h-full flex items-center justify-center">
             <span className="material-symbols-outlined text-white/20 text-6xl">image</span>
