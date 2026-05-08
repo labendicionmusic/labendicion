@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
+import MerchTeaser from './merch/MerchTeaser';
 
 // --- CONFIGURACIÓN DEL HERO ---
 const HERO_TYPE: 'image' | 'video' = 'video';
@@ -517,43 +518,8 @@ export default function Home() {
             subtitle="Drop Oficial // Stock Limitado"
           />
 
-          {/* Product previews */}
-          <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 mb-16"
-            variants={staggerContainer}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: '-100px' }}
-          >
-            {[
-              { src: '/merch-lp.webp',       alt: 'Vol. 1 LP',     badge: 'NUESTRO LP' },
-              { src: '/merch-shirt.jpg',      alt: 'Playera',       badge: null },
-              { src: '/merch-cap-black.jpg',  alt: 'Gorra Negra',   badge: null },
-              { src: '/merch-coasters.jpg',   alt: 'Porta vasos',   badge: null },
-            ].map((item) => (
-              <motion.a
-                key={item.src}
-                href="https://labendicionmusic.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                variants={fadeInUp}
-                className="relative aspect-square overflow-hidden border border-outline-variant/30 group bg-surface-container"
-              >
-                <Image
-                  src={item.src}
-                  alt={item.alt}
-                  fill
-                  className="object-contain p-6 grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                {item.badge && (
-                  <span className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 font-mono text-[9px] font-black uppercase tracking-[0.2em] animate-pulse">
-                    {item.badge}
-                  </span>
-                )}
-              </motion.a>
-            ))}
-          </motion.div>
+          {/* Product previews — Shopify live */}
+          <MerchTeaser />
 
           {/* CTA */}
           <motion.div
@@ -563,18 +529,16 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="flex flex-col sm:flex-row items-center gap-6"
           >
-            <a
-              href="https://labendicionmusic.com"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/merch"
               className="inline-flex items-center gap-3 bg-primary text-black font-mono text-sm uppercase tracking-[0.3em] font-black px-12 py-5 hover:bg-primary-container transition-all duration-300 group"
             >
               <span className="material-symbols-outlined text-[20px]">shopping_bag</span>
-              Ir a la Tienda
+              Ver Tienda
               <span className="material-symbols-outlined text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
-            </a>
+            </Link>
             <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-on-surface-variant/40">
-              labendicionmusic.com
+              labendicionofficial.com/merch
             </p>
           </motion.div>
 

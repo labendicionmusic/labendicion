@@ -9,7 +9,7 @@ import { formatMoney, type ShopifyCartLine } from '@/lib/shopify';
 export default function CartDrawer() {
   const { cart, isOpen, isLoading, closeCart, removeItem, updateItem } = useCart();
 
-  const lines: ShopifyCartLine[] = cart?.lines.edges.map((e) => e.node) ?? [];
+  const lines: ShopifyCartLine[] = cart?.lines?.edges?.map((e) => e.node) ?? [];
   const isEmpty = lines.length === 0;
 
   return (
