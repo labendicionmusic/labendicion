@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -32,8 +32,8 @@ const BIO_FULL = [
 ];
 
 const VIDEOS = [
+  { title: 'La Bendición Vol. 1 (Promo)', youtubeId: 'F6Pk272OEJo' },
   { title: 'Mal De Amor (feat. Camila Guevara)', youtubeId: 'QMYZJRabbYA' },
-  { title: "Cuidao' Por Ahí (Visualizer)", youtubeId: '2fXAj_6F5jw' },
   { title: 'La Perla', youtubeId: 'zcyeXJZ-FRY' },
 ];
 
@@ -44,11 +44,29 @@ const TRACKS = [
   { title: 'La Perla', spotifyId: '2twDC3NL2XA4AqLScXVInC' },
 ];
 
-const GALLERY: { src: string; alt: string; orientation: 'h' | 'v'; downloadable?: boolean }[] = [
-  { src: '/foto1.jpg', alt: 'La Bendición — Foto de prensa 1', orientation: 'h', downloadable: true },
-  { src: '/foto2.jpg', alt: 'La Bendición — Foto de prensa 2', orientation: 'h', downloadable: true },
-  { src: '/foto3.jpg', alt: 'La Bendición — Foto de prensa 3', orientation: 'v', downloadable: true },
-  { src: '/foto4.jpg', alt: 'La Bendición — Foto de prensa 4', orientation: 'v', downloadable: true },
+const GALLERY: { src: string; download: string; alt: string; orientation: 'h' | 'v' }[] = [
+  { src: '/LB1.webp',  download: '/LB1.JPEG',  alt: 'La Bendición — Foto de prensa 1',  orientation: 'h' },
+  { src: '/LB2.webp',  download: '/LB2.JPEG',  alt: 'La Bendición — Foto de prensa 2',  orientation: 'v' },
+  { src: '/LB3.webp',  download: '/LB3.jpg',   alt: 'La Bendición — Foto de prensa 3',  orientation: 'h' },
+  { src: '/LB4.webp',  download: '/LB4.JPG',   alt: 'La Bendición — Foto de prensa 4',  orientation: 'h' },
+  { src: '/LB5.webp',  download: '/LB5.JPG',   alt: 'La Bendición — Foto de prensa 5',  orientation: 'h' },
+  { src: '/LB6.webp',  download: '/LB6.JPEG',  alt: 'La Bendición — Foto de prensa 6',  orientation: 'h' },
+  { src: '/LB7.webp',  download: '/LB7.JPEG',  alt: 'La Bendición — Foto de prensa 7',  orientation: 'h' },
+  { src: '/LB8.webp',  download: '/LB8.JPEG',  alt: 'La Bendición — Foto de prensa 8',  orientation: 'v' },
+  { src: '/LB9.webp',  download: '/LB9.JPEG',  alt: 'La Bendición — Foto de prensa 9',  orientation: 'v' },
+  { src: '/LB10.webp', download: '/LB10.JPEG', alt: 'La Bendición — Foto de prensa 10', orientation: 'v' },
+  { src: '/LB11.webp', download: '/LB11.JPEG', alt: 'La Bendición — Foto de prensa 11', orientation: 'h' },
+  { src: '/LB12.webp', download: '/LB12.JPEG', alt: 'La Bendición — Foto de prensa 12', orientation: 'v' },
+  { src: '/LB13.webp', download: '/LB13.JPEG', alt: 'La Bendición — Foto de prensa 13', orientation: 'v' },
+  { src: '/LB14.webp', download: '/LB14.JPEG', alt: 'La Bendición — Foto de prensa 14', orientation: 'v' },
+  { src: '/LB15.webp', download: '/LB15.JPEG', alt: 'La Bendición — Foto de prensa 15', orientation: 'v' },
+  { src: '/LB16.webp', download: '/LB16.JPEG', alt: 'La Bendición — Foto de prensa 16', orientation: 'v' },
+  { src: '/LB17.webp', download: '/LB17.JPEG', alt: 'La Bendición — Foto de prensa 17', orientation: 'v' },
+  { src: '/LB18.webp', download: '/LB18.JPEG', alt: 'La Bendición — Foto de prensa 18', orientation: 'v' },
+  { src: '/LB19.webp', download: '/LB19.JPEG', alt: 'La Bendición — Foto de prensa 19', orientation: 'v' },
+  { src: '/LB20.webp', download: '/LB20.JPEG', alt: 'La Bendición — Foto de prensa 20', orientation: 'v' },
+  { src: '/LB21.webp', download: '/LB21.JPEG', alt: 'La Bendición — Foto de prensa 21', orientation: 'v' },
+  { src: '/LB22.webp', download: '/LB22.JPEG', alt: 'La Bendición — Foto de prensa 22', orientation: 'v' },
 ];
 
 const SETLIST: string[] = [
@@ -61,17 +79,15 @@ const CALENDAR: { date: string; venue: string; city: string; tickets?: string }[
 ];
 
 const CONTACTS = [
-  // TODO: completar con datos reales de contacto
-  { role: 'Booking / Management', name: '— Por confirmar —', email: '— Por confirmar —', phone: '' },
-  { role: 'Prensa', name: '— Por confirmar —', email: '— Por confirmar —', phone: '' },
+  { role: 'Booking / Management', name: 'La Bendición', email: 'management@labendicionmusic.com', phone: '+525530449174' },
+  { role: 'Prensa', name: 'La Bendición', email: 'admin@labendicionmusic.com', phone: '+525530449174' },
 ];
 
 // Archivos técnicos descargables
 // TODO: subir los PDFs a /public/ y actualizar las rutas
 const TECH_DOCS = [
-  { label: 'Rider Técnico', icon: 'speaker', file: '/rider-tecnico-labendicion.pdf' },
-  { label: 'Stage Plot', icon: 'stage', file: '/stage-plot-labendicion.pdf' },
-  { label: 'Hospitality', icon: 'hotel', file: '/hospitality-labendicion.pdf' },
+  { label: 'Tech Rider + Hospitality', icon: 'speaker', file: '/tech-rider-hospitality-labendicion.pdf' },
+  { label: 'Stage Plot + Input List', icon: 'grid_view', file: '/stage-plot-input-list-labendicion.pdf' },
 ];
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -100,6 +116,122 @@ function YouTubeEmbed({ videoId, title }: { videoId: string; title: string }) {
   );
 }
 
+function GalleryCarousel({
+  gallery,
+  onOpen,
+}: {
+  gallery: typeof GALLERY;
+  onOpen: (i: number) => void;
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState(0);
+  const total = gallery.length;
+
+  function updateCurrent() {
+    const track = trackRef.current;
+    if (!track) return;
+    const scrollLeft = track.scrollLeft;
+    // Si llegó al final del scroll, marcar el último
+    if (scrollLeft + track.clientWidth >= track.scrollWidth - 4) {
+      setCurrent(total - 1);
+      return;
+    }
+    // Slide cuyo offsetLeft está más cerca del scroll actual
+    let closest = 0;
+    let minDist = Infinity;
+    Array.from(track.children).forEach((child, i) => {
+      const dist = Math.abs((child as HTMLElement).offsetLeft - scrollLeft);
+      if (dist < minDist) { minDist = dist; closest = i; }
+    });
+    setCurrent(closest);
+  }
+
+  function scrollTo(index: number) {
+    if (!trackRef.current) return;
+    const slide = trackRef.current.children[index] as HTMLElement;
+    if (slide) slide.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+  }
+
+  function prev() { scrollTo(Math.max(0, current - 1)); }
+  function next() { scrollTo(Math.min(total - 1, current + 1)); }
+
+  return (
+    <section className="py-16 md:py-20 border-t border-white/10">
+      <SectionLabel number="04" label="Galería de prensa" />
+
+      {/* Track con scroll-snap */}
+      <div className="relative">
+        <div
+          ref={trackRef}
+          className="flex gap-2 overflow-x-auto snap-x snap-mandatory scroll-smooth pb-2 hide-scrollbar"
+          style={{ scrollbarWidth: 'none' }}
+          onScroll={updateCurrent}
+        >
+          {gallery.map((photo, i) => (
+            <button
+              key={i}
+              onClick={() => onOpen(i)}
+              className={`relative flex-shrink-0 overflow-hidden bg-surface-container border border-white/10 group snap-start
+                ${photo.orientation === 'v'
+                  ? 'w-[38vw] sm:w-[24vw] md:w-[16vw] aspect-[3/4]'
+                  : 'w-[50vw] sm:w-[30vw] md:w-[22vw] aspect-video'
+                }`}
+            >
+              <Image
+                src={photo.src}
+                alt={photo.alt}
+                fill
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 30vw, 22vw"
+                className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                <span className="material-symbols-outlined text-white text-4xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 drop-shadow-lg">
+                  open_in_full
+                </span>
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Flecha anterior */}
+        <button
+          onClick={prev}
+          disabled={current === 0}
+          className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 bg-black/80 border border-white/20 text-white w-10 h-10 flex items-center justify-center hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 disabled:opacity-20 disabled:pointer-events-none z-10"
+        >
+          <span className="material-symbols-outlined text-xl">chevron_left</span>
+        </button>
+
+        {/* Flecha siguiente */}
+        <button
+          onClick={next}
+          disabled={current === total - 1}
+          className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 bg-black/80 border border-white/20 text-white w-10 h-10 flex items-center justify-center hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 disabled:opacity-20 disabled:pointer-events-none z-10"
+        >
+          <span className="material-symbols-outlined text-xl">chevron_right</span>
+        </button>
+      </div>
+
+      {/* Dots */}
+      <div className="flex justify-center gap-2 mt-5">
+        {gallery.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => scrollTo(i)}
+            className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+              i === current ? 'bg-primary w-5' : 'bg-white/20 hover:bg-white/50'
+            }`}
+          />
+        ))}
+      </div>
+
+      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20 mt-5 text-center">
+        Click en cualquier foto para ampliar · Descargables en alta resolución
+      </p>
+    </section>
+  );
+}
+
 export default function BookingPage() {
   const [bioExpanded, setBioExpanded] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
@@ -112,7 +244,7 @@ export default function BookingPage() {
       <div className="w-full bg-black border-b border-white/10 px-6 py-3 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center gap-3">
           <div className="relative h-7 w-7">
-            <Image src="/logo-bendicion.svg" alt="La Bendición" fill className="object-contain" />
+            <Image src="/logo-bendicion.svg" alt="La Bendición" fill sizes="28px" className="object-contain" />
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/50 hidden sm:block">
             La Bendición
@@ -135,16 +267,17 @@ export default function BookingPage() {
 
       {/* ── 01 · HERO ───────────────────────────────────────────── */}
       <section className="relative w-full min-h-[70vh] md:min-h-screen flex items-end overflow-hidden">
-        {/* Foto */}
-        <div className="absolute inset-0">
-          <Image
-            src={ARTIST.heroPhoto}
-            alt={ARTIST.name}
-            fill
-            className="object-cover object-top"
-            priority
+        {/* Video de fondo */}
+        <div className="absolute inset-0 bg-black">
+          <iframe
+            src="https://www.youtube.com/embed/F6Pk272OEJo?autoplay=1&mute=1&loop=1&playlist=F6Pk272OEJo&controls=0&rel=0&showinfo=0&modestbranding=1&playsinline=1&disablekb=1&iv_load_policy=3"
+            title="La Bendición — Hero Background"
+            allow="autoplay; encrypted-media"
+            className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+            style={{ width: 'max(100%, 177.78vh)', height: 'max(100%, 56.25vw)' }}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
         </div>
 
         {/* Texto */}
@@ -310,63 +443,13 @@ export default function BookingPage() {
         </section>
 
         {/* ── 05 · GALERÍA ──────────────────────────────────────── */}
-        <section className="py-16 md:py-20 border-t border-white/10">
-          <SectionLabel number="04" label="Galería de prensa" />
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 mb-4">
-            {GALLERY.map((photo, i) => (
-              <motion.button
-                key={i}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                onClick={() => setLightboxIndex(i)}
-                className={`relative overflow-hidden bg-surface-container border border-white/10 group ${
-                  photo.orientation === 'v' ? 'aspect-[3/4]' : 'aspect-video'
-                }`}
-              >
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-white text-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    open_in_full
-                  </span>
-                </div>
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Botones de descarga */}
-          <div className="flex flex-wrap gap-3 mt-6">
-            {GALLERY.filter((p) => p.downloadable).map((photo, i) => (
-              <a
-                key={i}
-                href={photo.src}
-                download
-                className="inline-flex items-center gap-2 border border-white/20 text-white/60 font-mono text-[10px] uppercase tracking-[0.2em] px-4 py-2 hover:text-primary hover:border-primary transition-all duration-300"
-              >
-                <span className="material-symbols-outlined text-[14px]">download</span>
-                Foto {i + 1}
-              </a>
-            ))}
-          </div>
-
-          <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/20 mt-4">
-            {/* TODO: agregar más fotos en GALLERY cuando las tengas */}
-            Click en cualquier foto para ampliar · Descargables en alta resolución
-          </p>
-        </section>
+        <GalleryCarousel gallery={GALLERY} onOpen={setLightboxIndex} />
 
         {/* ── 06 · RIDER TÉCNICO ────────────────────────────────── */}
         <section className="py-16 md:py-20 border-t border-white/10">
           <SectionLabel number="05" label="Documentos técnicos" />
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-white/10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-white/10">
             {TECH_DOCS.map((doc, i) => (
               <motion.div
                 key={i}
@@ -524,7 +607,7 @@ export default function BookingPage() {
         <div className="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 pb-6 border-b border-white/5">
           <div className="flex items-center gap-3">
             <div className="relative h-6 w-6">
-              <Image src="/logo-bendicion.svg" alt="La Bendición" fill className="object-contain" />
+              <Image src="/logo-bendicion.svg" alt="La Bendición" fill sizes="24px" className="object-contain" />
             </div>
             <span className="font-mono text-[10px] uppercase tracking-[0.35em] text-white/40">
               La Bendición © {new Date().getFullYear()}
@@ -595,13 +678,13 @@ export default function BookingPage() {
 
             {/* Descargar */}
             <a
-              href={GALLERY[lightboxIndex].src}
+              href={GALLERY[lightboxIndex].download}
               download
               onClick={(e) => e.stopPropagation()}
               className="absolute bottom-6 left-1/2 -translate-x-1/2 inline-flex items-center gap-2 bg-primary text-black font-mono text-xs uppercase tracking-[0.25em] font-black px-6 py-3 hover:bg-white transition-all duration-300"
             >
               <span className="material-symbols-outlined text-[16px]">download</span>
-              Descargar foto
+              Descargar HD
             </a>
           </motion.div>
         )}
