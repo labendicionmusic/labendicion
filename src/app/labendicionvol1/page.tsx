@@ -18,19 +18,18 @@ const ALBUM = {
 };
 
 // TODO: reemplazar con el ID del promo FYC de 1:30–2:00 cuando esté listo
-const FYC_PROMO_VIDEO_ID = 'nuClYq_09vE';
+const FYC_PROMO_VIDEO_ID = 'F6Pk272OEJo';
 
-// TODO: confirmar cuál es el videoclip principal de lanzamiento
-const LAUNCH_VIDEO_ID = '2fXAj_6F5jw';
+const LAUNCH_VIDEO_ID = 'QMYZJRabbYA';
 
 // TODO: reemplazar con el path al poster promocional real (PNG/JPG de alta resolución)
-const POSTER_SRC = '/merch-lp.webp';
+const POSTER_SRC = '/Poster.jpg';
 const POSTER_FILENAME = 'LaBendicion-Vol1-Poster.jpg';
 
 const CREDITS: { role: string; name: string }[] = [
   { role: 'Producido por', name: 'Julián Bernal, Gabriel Melgarejo, Geovanis Alcántara y Michael Rincon' },
   { role: 'Colaboraciones', name: 'Camila Guevara, Melanie Santiler, Kid Pistola, Andres Levin, Jambene, América Valdes, Luis Figueroa, Ramon Alvarez, Donovan Morales y Dav Julca' },
-  { role: 'Grabado por', name: '— por confirmar —' },
+  { role: 'Grabado por', name: 'Julián Bernal' },
   { role: 'Mezclado por', name: 'Julián Bernal' },
   { role: 'Masterizado por', name: 'Lewis Picket' },
   { role: 'Grabado en', name: 'Animales Distintos Rec.' },
@@ -126,6 +125,34 @@ function YouTubeEmbed({ videoId, title }: { videoId: string; title: string }) {
 }
 
 const PAGE_URL = 'https://labendicionofficial.com/labendicionvol1';
+
+// Crossfade entre portada y contraportada cada 4 segundos
+function AlbumCoverCrossfade({ alt }: { alt: string }) {
+  const covers = ['/portada-oficial.webp', '/poster.webp'];
+  const [current, setCurrent] = React.useState(0);
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((v) => (v + 1) % covers.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <>
+      {covers.map((src, i) => (
+        <Image
+          key={src}
+          src={src}
+          alt={alt}
+          fill
+          className={`object-contain transition-opacity duration-1000 ${i === current ? 'opacity-100' : 'opacity-0'}`}
+          priority={i === 0}
+        />
+      ))}
+    </>
+  );
+}
 const SHARE_TEXT = "Escucha La Bendición Vol. 1 — Agua bendita pa to' el mundo 🎶";
 
 const SHARE_OPTIONS = [
@@ -272,13 +299,7 @@ export default function FYCPage() {
             className="w-full max-w-[320px] md:max-w-[360px] flex-shrink-0 mx-auto md:mx-0"
           >
             <div className="relative aspect-square shadow-[0_0_80px_rgba(0,255,157,0.12)]">
-              <Image
-                src={ALBUM.cover}
-                alt={`${ALBUM.artist} – ${ALBUM.title}`}
-                fill
-                className="object-contain"
-                priority
-              />
+              <AlbumCoverCrossfade alt={`${ALBUM.artist} – ${ALBUM.title}`} />
             </div>
           </motion.div>
 
@@ -349,7 +370,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-8"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">01 — Video Promocional</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Video Promocional</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               Conoce La Bendición Vol. 1
             </h2>
@@ -382,7 +403,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-10"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">02 — Prensa</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Prensa</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               Lo que dicen
             </h2>
@@ -435,12 +456,12 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-8"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">03 — Video Clip Oficial</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Video Clip Oficial</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
-              Cuidao&apos; Por Ahí
+              Mal De Amor
             </h2>
             <p className="font-serif italic text-white/50 mt-2 text-base md:text-lg">
-              Sencillo de lanzamiento — {ALBUM.year}
+              feat. Camila Guevara — Vol. 1 ({ALBUM.year})
             </p>
           </motion.div>
 
@@ -451,7 +472,7 @@ export default function FYCPage() {
             transition={{ duration: 0.8, delay: 0.1 }}
             className="border border-white/10"
           >
-            <YouTubeEmbed videoId={LAUNCH_VIDEO_ID} title="La Bendición – Cuidao' Por Ahí (Video Oficial)" />
+            <YouTubeEmbed videoId={LAUNCH_VIDEO_ID} title="La Bendición – Mal De Amor feat. Camila Guevara (Video Oficial)" />
           </motion.div>
         </div>
       </section>
@@ -468,7 +489,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-10"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">04 — Créditos</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Créditos</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               El equipo
             </h2>
@@ -508,7 +529,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-10"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">05 — Escuchar</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Escuchar</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               El disco
             </h2>
@@ -528,7 +549,7 @@ export default function FYCPage() {
             <iframe
               src={`https://open.spotify.com/embed/album/${ALBUM.spotifyId}?utm_source=generator&theme=0`}
               width="100%"
-              height="352"
+              height="720"
               allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
               loading="lazy"
               className="border-0"
@@ -541,6 +562,7 @@ export default function FYCPage() {
       <div className="max-w-5xl mx-auto px-6"><Divider /></div>
 
       {/* ── 07 · CITAS DE INVITADOS ─────────────────────────────── */}
+      {/* ── SECCIÓN ARTISTAS INVITADOS — oculta hasta tener las citas reales ──
       <section className="w-full py-16 md:py-20">
         <div className="max-w-5xl mx-auto px-6">
           <motion.div
@@ -550,7 +572,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-10"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">06 — Artistas invitados</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Artistas Invitados</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               Sus palabras
             </h2>
@@ -587,6 +609,7 @@ export default function FYCPage() {
       </section>
 
       <div className="max-w-5xl mx-auto px-6"><Divider /></div>
+      ── FIN SECCIÓN ARTISTAS INVITADOS ── */}
 
       {/* ── 08 · POSTER DESCARGABLE ─────────────────────────────── */}
       <section className="w-full py-16 md:py-20">
@@ -598,7 +621,7 @@ export default function FYCPage() {
             transition={{ duration: 0.7 }}
             className="mb-10"
           >
-            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">07 — Material</p>
+            <p className="font-mono text-[10px] uppercase tracking-[0.45em] text-primary mb-3">Material</p>
             <h2 className="font-display text-4xl md:text-5xl font-black tracking-tighter uppercase text-white">
               Poster oficial
             </h2>
