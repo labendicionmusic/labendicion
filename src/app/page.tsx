@@ -282,6 +282,7 @@ export default function Home() {
                 src="/bio-landing.webp"
                 alt="La Bendición en vivo"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover object-top grayscale contrast-110 hover:scale-105 transition-all duration-700"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent"></div>
@@ -494,6 +495,7 @@ export default function Home() {
                 src="/tour-live.webp"
                 alt="La Bendición Live"
                 fill
+                sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-80 hover:opacity-100 transition-all duration-700 hover:scale-105 grayscale hover:grayscale-0"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 opacity-70"></div>

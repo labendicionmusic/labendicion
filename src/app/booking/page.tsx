@@ -86,8 +86,8 @@ const CONTACTS = [
 // Archivos técnicos descargables
 // TODO: subir los PDFs a /public/ y actualizar las rutas
 const TECH_DOCS = [
-  { label: 'Tech Rider + Hospitality', icon: 'speaker', file: '/tech-rider-hospitality-labendicion.pdf' },
-  { label: 'Stage Plot + Input List', icon: 'grid_view', file: '/stage-plot-input-list-labendicion.pdf' },
+  { label: 'Tech Rider + Hospitality', icon: 'speaker', file: '/tech-rider-hospitality-labendicion.pdf', available: false },
+  { label: 'Stage Plot + Input List', icon: 'grid_view', file: '/stage-plot-input-list-labendicion.pdf', available: true },
 ];
 
 // ══════════════════════════════════════════════════════════════════════════════
@@ -463,18 +463,24 @@ export default function BookingPage() {
                 <h3 className="font-display text-xl font-black uppercase tracking-tight text-white">
                   {doc.label}
                 </h3>
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
-                  {/* TODO: subir el PDF correspondiente a /public/ */}
-                  PDF disponible próximamente
-                </p>
+                {!doc.available && (
+                  <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30">
+                    PDF disponible próximamente
+                  </p>
+                )}
                 <a
-                  href={doc.file}
-                  download
-                  className="inline-flex items-center gap-2 border border-white/20 text-white font-mono text-[10px] uppercase tracking-[0.25em] font-black px-6 py-3 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 opacity-40 pointer-events-none"
-                  aria-disabled="true"
+                  href={doc.available ? doc.file : undefined}
+                  target={doc.available ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  className={`inline-flex items-center gap-2 border font-mono text-[10px] uppercase tracking-[0.25em] font-black px-6 py-3 transition-all duration-300 ${
+                    doc.available
+                      ? 'border-white/20 text-white hover:bg-primary hover:text-black hover:border-primary'
+                      : 'border-white/10 text-white/20 opacity-40 pointer-events-none'
+                  }`}
+                  aria-disabled={!doc.available}
                 >
-                  <span className="material-symbols-outlined text-[14px]">download</span>
-                  Descargar
+                  <span className="material-symbols-outlined text-[14px]">open_in_new</span>
+                  Ver documento
                 </a>
               </motion.div>
             ))}
