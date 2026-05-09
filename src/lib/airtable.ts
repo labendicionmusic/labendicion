@@ -35,8 +35,7 @@ export async function getTourDates(): Promise<TourDate[]> {
     `https://api.airtable.com/v0/${baseId}/${tableId}?${params.toString()}`,
     {
       headers: { Authorization: `Bearer ${token}` },
-      // Revalidate every hour in Next.js ISR
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     }
   );
 

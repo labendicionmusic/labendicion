@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
 import { getTourDates } from '@/lib/airtable';
 
-// Revalidate every hour
-export const revalidate = 3600;
+// Always fetch fresh from Airtable (no edge cache)
+export const dynamic = 'force-dynamic';
 
 export async function GET() {
   try {
