@@ -1,6 +1,16 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import type { TourDate } from '@/lib/airtable';
+
+const MESES: Record<number, string> = {
+  1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun',
+  7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic',
+};
+function formatDate(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return `${MESES[m]} ${d}, ${y}`;
+}
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -74,9 +84,6 @@ const SETLIST: string[] = [
   '— Setlist por confirmar —',
 ];
 
-const CALENDAR: { date: string; venue: string; city: string; tickets?: string }[] = [
-  { date: 'Abr 29, 2026', venue: 'Tonal', city: 'CDMX, México' },
-];
 
 const CONTACTS = [
   { role: 'Booking / Management', name: 'La Bendición', email: 'management@labendicionmusic.com', phone: '+525530449174' },
@@ -236,6 +243,16 @@ export default function BookingPage() {
   const [bioExpanded, setBioExpanded] = useState(false);
   const [activeVideo, setActiveVideo] = useState(0);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [tourDates, setTourDates] = useState<TourDate[]>([]);
+  const [calLoading, setCalLoading] = useState(true);
+
+  useEffect(() => {
+    fetch('/api/tour-dates')
+      .then((r) => r.json())
+      .then((data: TourDate[]) => { if (Array.isArray(data)) setTourDates(data); })
+      .catch(() => {})
+      .finally(() => setCalLoading(false));
+  }, []);
 
   return (
     <div className="w-full min-h-screen bg-background text-on-background overflow-x-hidden selection:bg-primary selection:text-black">
@@ -518,45 +535,57 @@ export default function BookingPage() {
           <SectionLabel number="07" label="Calendario" />
 
           <div className="flex flex-col gap-px bg-white/10">
-            {CALENDAR[0].date === '— Por confirmar —' ? (
+            {calLoading && (
+              <div className="bg-background flex flex-col items-center gap-4 py-12 text-center">
+                <span className="material-symbols-outlined text-primary/40 text-5xl animate-spin">progress_activity</span>
+                <p className="font-mono text-xs uppercase tracking-[0.35em] text-white/30">Cargando fechas…</p>
+              </div>
+            )}
+
+            {!calLoading && tourDates.length === 0 && (
               <div className="bg-background flex flex-col items-center gap-4 py-12 text-center">
                 <span className="material-symbols-outlined text-primary/40 text-5xl">calendar_month</span>
                 <p className="font-mono text-xs uppercase tracking-[0.35em] text-white/30">
-                  {/* TODO: llenar el array CALENDAR con las fechas de tour */}
                   Fechas por confirmar
                 </p>
               </div>
-            ) : (
-              CALENDAR.map((show, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, x: -16 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.07 }}
-                  className="bg-background px-8 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
-                >
-                  <div className="flex items-center gap-6">
-                    <span className="font-mono text-sm text-primary font-bold">{show.date}</span>
-                    <div>
-                      <p className="font-display text-lg font-black uppercase tracking-tight text-white">{show.venue}</p>
-                      <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">{show.city}</p>
-                    </div>
-                  </div>
-                  {show.tickets && (
-                    <a
-                      href={show.tickets}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 border border-white/20 text-white font-mono text-[10px] uppercase tracking-[0.2em] font-black px-5 py-2 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 self-start sm:self-auto"
-                    >
-                      Boletos
-                      <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
-                    </a>
-                  )}
-                </motion.div>
-              ))
             )}
+
+            {!calLoading && tourDates.map((show, i) => (
+              <motion.div
+                key={show.id}
+                initial={{ opacity: 0, x: -16 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.07 }}
+                className="bg-background px-8 py-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4"
+              >
+                <div className="flex items-center gap-6">
+                  <span className="font-mono text-sm text-primary font-bold">{formatDate(show.date)}</span>
+                  <div>
+                    <p className="font-display text-lg font-black uppercase tracking-tight text-white">{show.venue}</p>
+                    <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+                      {show.city}, {show.country}
+                    </p>
+                  </div>
+                </div>
+                {show.ticketsUrl ? (
+                  <a
+                    href={show.ticketsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 border border-white/20 text-white font-mono text-[10px] uppercase tracking-[0.2em] font-black px-5 py-2 hover:bg-primary hover:text-black hover:border-primary transition-all duration-300 self-start sm:self-auto"
+                  >
+                    Boletos
+                    <span className="material-symbols-outlined text-[14px]">arrow_forward</span>
+                  </a>
+                ) : (
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 self-start sm:self-auto px-5 py-2 border border-white/10">
+                    Próximamente
+                  </span>
+                )}
+              </motion.div>
+            ))}
           </div>
         </section>
 

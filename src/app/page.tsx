@@ -1,10 +1,20 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import MerchTeaser from './merch/MerchTeaser';
+import type { TourDate } from '@/lib/airtable';
+
+const MESES: Record<number, string> = {
+  1: 'Ene', 2: 'Feb', 3: 'Mar', 4: 'Abr', 5: 'May', 6: 'Jun',
+  7: 'Jul', 8: 'Ago', 9: 'Sep', 10: 'Oct', 11: 'Nov', 12: 'Dic',
+};
+function parseDateParts(iso: string) {
+  const [y, m, d] = iso.split('-').map(Number);
+  return { month: MESES[m] ?? '—', day: String(d).padStart(2, '0'), year: String(y) };
+}
 
 // --- CONFIGURACIÓN DEL HERO ---
 const HERO_TYPE: 'image' | 'video' = 'video';
@@ -80,6 +90,18 @@ function SectionHeader({
 
 export default function Home() {
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
+  const [upcomingDates, setUpcomingDates] = useState<TourDate[]>([]);
+
+  useEffect(() => {
+    fetch('/api/tour-dates')
+      .then((r) => r.json())
+      .then((data: TourDate[]) => {
+        if (Array.isArray(data)) setUpcomingDates(data.slice(0, 2));
+      })
+      .catch(() => {/* keep empty */});
+  }, []);
+
+  const nextDate = upcomingDates[0] ?? null;
 
   return (
     <div className="w-full bg-background overflow-x-hidden selection:bg-primary selection:text-black">
@@ -442,35 +464,48 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <article className="group relative bg-surface-container border border-outline-variant/30 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between transition-colors hover:bg-surface-variant overflow-hidden">
-                <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary transform scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
-                <div className="flex flex-col sm:flex-row items-center gap-8 w-full sm:w-auto mb-6 sm:mb-0 text-center sm:text-left">
-                  <div className="min-w-[80px]">
-                    <span className="block text-secondary font-mono text-sm uppercase tracking-widest font-bold">Abr</span>
-                    <span className="block font-display text-7xl text-white font-black leading-none">29</span>
-                    <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">2026</span>
-                  </div>
-                  <div>
-                    <h3 className="font-display text-3xl text-white mb-2 font-bold uppercase tracking-tight">CDMX, México</h3>
-                    <p className="font-sans text-on-surface-variant font-light flex items-center gap-2">
-                      <span className="material-symbols-outlined text-[18px] text-primary">location_on</span>
-                      Tonal
-                    </p>
-                  </div>
-                </div>
-                <a
-                  href="https://www.tonaltonal.com/events/la-bendicion"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full sm:w-auto bg-primary text-black font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:scale-105 transition-all duration-300 whitespace-nowrap text-center shadow-[0_0_20px_rgba(0,255,157,0.2)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]"
-                >
-                  Boletos
-                </a>
-              </article>
-
-              <p className="font-sans text-on-surface-variant font-light leading-relaxed max-w-xl">
-                La Bendición llega a Tonal para una noche de <span className="text-secondary">salsa</span>, sudor y ritmo. Prepárate para la experiencia completa en vivo.
-              </p>
+              {upcomingDates.length > 0 ? upcomingDates.map((event) => {
+                const { month, day, year } = parseDateParts(event.date);
+                return (
+                  <article key={event.id} className="group relative bg-surface-container border border-outline-variant/30 p-8 md:p-10 flex flex-col sm:flex-row items-center justify-between transition-colors hover:bg-surface-variant overflow-hidden">
+                    <div className="absolute left-0 top-0 bottom-0 w-1 bg-primary transform scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300" />
+                    <div className="flex flex-col sm:flex-row items-center gap-8 w-full sm:w-auto mb-6 sm:mb-0 text-center sm:text-left">
+                      <div className="min-w-[80px]">
+                        <span className="block text-secondary font-mono text-sm uppercase tracking-widest font-bold">{month}</span>
+                        <span className="block font-display text-7xl text-white font-black leading-none">{day}</span>
+                        <span className="block font-mono text-xs text-on-surface-variant uppercase tracking-widest mt-1">{year}</span>
+                      </div>
+                      <div>
+                        <h3 className="font-display text-3xl text-white mb-2 font-bold uppercase tracking-tight">
+                          {event.city}, {event.country}
+                        </h3>
+                        <p className="font-sans text-on-surface-variant font-light flex items-center gap-2">
+                          <span className="material-symbols-outlined text-[18px] text-primary">location_on</span>
+                          {event.venue}
+                        </p>
+                      </div>
+                    </div>
+                    {event.ticketsUrl ? (
+                      <a
+                        href={event.ticketsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full sm:w-auto bg-primary text-black font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 hover:bg-white hover:scale-105 transition-all duration-300 whitespace-nowrap text-center shadow-[0_0_20px_rgba(0,255,157,0.2)] hover:shadow-[0_0_30px_rgba(0,255,157,0.5)]"
+                      >
+                        Boletos
+                      </a>
+                    ) : (
+                      <span className="w-full sm:w-auto font-mono text-xs uppercase tracking-[0.2em] font-black px-10 py-5 whitespace-nowrap text-center border border-white/20 text-white/40">
+                        Próximamente
+                      </span>
+                    )}
+                  </article>
+                );
+              }) : (
+                <p className="font-sans text-on-surface-variant font-light leading-relaxed max-w-xl">
+                  Nuevas fechas en preparación. Síguenos para no perderte nada.
+                </p>
+              )}
 
               <div>
                 <Link
@@ -498,10 +533,23 @@ export default function Home() {
                 sizes="(max-width: 768px) 100vw, 50vw"
                 className="object-cover opacity-80 hover:opacity-100 transition-all duration-700 hover:scale-105 grayscale hover:grayscale-0"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 opacity-70"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/20 opacity-70" />
               <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-md p-6 border-t border-outline-variant">
-                <h4 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-primary mb-1">PRÓXIMA PARADA: CDMX</h4>
-                <p className="font-sans text-on-surface-variant text-xs font-light">29 ABR — Tonal, Ciudad de México</p>
+                {nextDate ? (
+                  <>
+                    <h4 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-primary mb-1">
+                      PRÓXIMA PARADA: {nextDate.city.toUpperCase()}
+                    </h4>
+                    <p className="font-sans text-on-surface-variant text-xs font-light">
+                      {parseDateParts(nextDate.date).day} {parseDateParts(nextDate.date).month.toUpperCase()} — {nextDate.venue}, {nextDate.city}
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h4 className="font-mono text-xs uppercase tracking-[0.2em] font-bold text-primary mb-1">PRÓXIMAMENTE</h4>
+                    <p className="font-sans text-on-surface-variant text-xs font-light">Nuevas fechas en preparación</p>
+                  </>
+                )}
               </div>
             </motion.div>
           </div>
