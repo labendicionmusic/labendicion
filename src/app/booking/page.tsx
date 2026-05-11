@@ -27,7 +27,7 @@ const ARTIST = {
   since: '2022',
 };
 
-const EPK_PDF = '/PRESSKIT + LIVE SHOW.pdf';
+const EPK_PDF = '/epk-labendicion.pdf';
 
 const BIO_SHORT = [
   'La Bendición es una agrupación de salsa y música tropical contemporánea originaria de la Ciudad de México, integrada por personalidades de trayectoria reconocida en la industria. Su propuesta busca honrar la herencia de la música afrocaribeña mediante la fusión de sonidos urbanos con un estilo fresco, poderoso y original.',
