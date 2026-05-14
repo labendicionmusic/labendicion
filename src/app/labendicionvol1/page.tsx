@@ -284,7 +284,7 @@ export default function FYCPage() {
         </div>
         <div className="flex items-center gap-2">
           <span className="inline-block border border-primary/60 text-primary font-mono text-[10px] uppercase tracking-[0.35em] px-3 py-1">
-            For Your Consideration
+            PROMO
           </span>
         </div>
       </div>
@@ -309,13 +309,6 @@ export default function FYCPage() {
           <div className="flex flex-col items-center md:items-start text-center md:text-left gap-5 w-full">
             <motion.p
               variants={fadeUp} initial="hidden" animate="visible" custom={0}
-              className="font-mono text-[10px] uppercase tracking-[0.55em] text-primary"
-            >
-              Latin Grammy — For Your Consideration · {ALBUM.year}
-            </motion.p>
-
-            <motion.p
-              variants={fadeUp} initial="hidden" animate="visible" custom={1}
               className="font-mono text-sm uppercase tracking-[0.3em] text-white/50"
             >
               {ALBUM.artist}
@@ -695,7 +688,7 @@ export default function FYCPage() {
             </span>
           </div>
           <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-primary/50 text-center">
-            For Your Consideration — Latin Grammy {new Date().getFullYear()}
+            PROMO
           </span>
           <a href="/" className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/30 hover:text-white transition-colors">
             labendicionofficial.com
